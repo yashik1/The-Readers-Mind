@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Reader's Mind | A Digital Atelier for High-Level Discourse</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-on-surface": "#f4f1e8",
+                    "secondary-container": "#ff775f",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed-variant": "#882010",
+                    "tertiary-container": "#2b2009",
+                    "background": "#fcf9f0",
+                    "inverse-primary": "#aec7f6",
+                    "inverse-surface": "#31312b",
+                    "surface": "#fcf9f0",
+                    "surface-container-low": "#f6f3ea",
+                    "surface-variant": "#e5e2da",
+                    "on-tertiary-fixed-variant": "#52452b",
+                    "tertiary-fixed": "#f5e0bd",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#710e03",
+                    "secondary-fixed": "#ffdad4",
+                    "tertiary": "#110a00",
+                    "primary": "#000a1e",
+                    "surface-container-highest": "#e5e2da",
+                    "surface-container-high": "#ebe8df",
+                    "on-primary-container": "#708ab5",
+                    "surface-tint": "#465f88",
+                    "on-tertiary-container": "#988768",
+                    "on-surface": "#1c1c17",
+                    "primary-fixed-dim": "#aec7f6",
+                    "primary-fixed": "#d6e3ff",
+                    "on-background": "#1c1c17",
+                    "surface-dim": "#dddad1",
+                    "primary-container": "#002147",
+                    "on-tertiary": "#ffffff",
+                    "on-surface-variant": "#44474e",
+                    "outline": "#74777f",
+                    "on-error": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#3f0300",
+                    "on-tertiary-fixed": "#241a05",
+                    "tertiary-fixed-dim": "#d8c4a2",
+                    "secondary": "#a83725",
+                    "surface-bright": "#fcf9f0",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed-variant": "#2d476f",
+                    "secondary-fixed-dim": "#ffb4a6",
+                    "outline-variant": "#c4c6cf",
+                    "on-primary-fixed": "#001b3d",
+                    "surface-container": "#f1eee5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+        .serif-text { font-family: 'Newsreader', serif; }
+        .glass-nav {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-secondary-fixed-dim selection:text-on-secondary-fixed">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#fdfcfb]/80 dark:bg-[#000a1e]/80 backdrop-blur-md shadow-sm dark:shadow-none bg-surface-container-low transition-colors duration-300">
+<div class="flex justify-between items-center px-8 h-20 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-bold font-['Newsreader'] text-[#002147] dark:text-[#fdfcfb] italic tracking-tight">The Reader's Mind</span>
+<div class="hidden md:flex gap-6 items-center">
+<a class="text-[#002147]/70 dark:text-[#fdfcfb]/70 font-['Newsreader'] italic tracking-tight hover:text-[#a83725] transition-all duration-200" href="discussions.html">Essays</a>
+<a class="text-[#002147]/70 dark:text-[#fdfcfb]/70 font-['Newsreader'] italic tracking-tight hover:text-[#a83725] transition-all duration-200" href="discussions.html">Dialogues</a>
+<a class="text-[#002147]/70 dark:text-[#fdfcfb]/70 font-['Newsreader'] italic tracking-tight hover:text-[#a83725] transition-all duration-200" href="#">Archive</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#002147] dark:text-[#fdfcfb] cursor-pointer scale-95 active:scale-90" data-icon="notifications">notifications</span>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant/15">
+<img alt="User profile" data-alt="professional portrait of a man with spectacles in a library setting, warm academic lighting, scholarly aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDs3fslaSmAXED2M7L6fyvxLw0cUO_eQIhtLgqYSpxu59ynW4H8ViCP-imqGznbN4Tb47ojKz9P3NBeQyD4O9QMWljCTUjN6bsPGZ4M6VZNRxGXunBePgphKXPUex_VwencbDS24rQUBpUYXKhra1JlJfoUEiARW5HhDeWZKtw6LUqAKhwVexIhjBdNUW2wcJix8lxOmB7QAu-KoO5rKqpK0x2RZzVcm8176YQ8NtCphshlG61U3Hu7fYN4JdRJQbe6oJUlF7JY4F6N"/>
+</div>
+</div>
+</div>
+</nav>
+<div class="flex max-w-screen-2xl mx-auto">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col gap-4 px-6 h-screen w-64 pt-24 bg-[#fdfcfb] dark:bg-[#000a1e] fixed sticky top-0 bg-surface-container-low font-['Manrope'] font-medium text-sm">
+<div class="mb-8">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-surface text-xs" data-icon="palette">palette</span>
+</div>
+<span class="font-headline italic text-[#002147] text-lg">The Atelier</span>
+</div>
+<p class="text-on-surface-variant/60 text-xs">Curated Categories</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 py-3 px-4 text-[#a83725] font-bold border-r-4 border-[#a83725] bg-[#a83725]/5 translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+                    Trending
+                </a>
+<a class="flex items-center gap-3 py-3 px-4 text-[#002147]/60 dark:text-[#fdfcfb]/60 hover:bg-[#002147]/5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+                    Philosophy
+                </a>
+<a class="flex items-center gap-3 py-3 px-4 text-[#002147]/60 dark:text-[#fdfcfb]/60 hover:bg-[#002147]/5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="palette">palette</span>
+                    Art History
+                </a>
+<a class="flex items-center gap-3 py-3 px-4 text-[#002147]/60 dark:text-[#fdfcfb]/60 hover:bg-[#002147]/5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+                    Modernity
+                </a>
+<a class="flex items-center gap-3 py-3 px-4 text-[#002147]/60 dark:text-[#fdfcfb]/60 hover:bg-[#002147]/5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="gavel">gavel</span>
+                    Politics
+                </a>
+</nav>
+<button class="mt-8 bg-secondary text-on-secondary py-3 px-4 rounded-lg font-bold tracking-tight hover:opacity-90 transition-opacity">
+                Start a Discussion
+            </button>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 min-h-screen pt-24 pb-12 px-6 md:px-12">
+<!-- Hero Section -->
+<section class="relative rounded-xl overflow-hidden mb-20 bg-primary-container text-surface">
+<div class="absolute inset-0 opacity-30 mix-blend-overlay">
+<img class="w-full h-full object-cover" data-alt="grand old library with towering bookshelves, sunbeams filtering through large arched windows, dust motes dancing in the light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF4ANAtnqCOT0V2w_HkrBbk97LSKVKugVzcq7QIn_LBL25CeFlMH0GUmr3zZHrIL-2D1_7mJX997EkZnjjPXWjFdDg220OjoghQ0w_-mxapPQ8QdPeD9JxSG4tlk7_GR-cih8vvbelxFqysijkOUjMMXZMFm3fK2sns9xxt70vV5qrMFw_htr6ZZZl4d9vgUmUgYtlkcpPJmxzNA2JSD2-bKuN4ewFWvKETkFOAoPAA8L0-z80NFuhjZfXNTINaRnWSDwuKGqPt-00"/>
+</div>
+<div class="relative z-10 px-8 py-24 md:px-16 md:py-32 max-w-3xl">
+<span class="text-secondary-fixed-dim uppercase tracking-widest text-xs font-bold mb-4 block">The Digital Atelier</span>
+<h1 class="font-headline text-5xl md:text-7xl italic leading-tight mb-8">Where ideas breathe and discourse matures.</h1>
+<p class="font-body text-lg md:text-xl text-surface-variant/90 mb-10 leading-relaxed">Join a community of curious minds dedicated to deep reading and thoughtful inquiry. No feeds, just resonance.</p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-secondary text-on-secondary px-8 py-4 rounded-lg font-bold text-lg hover:bg-secondary-container transition-colors">Enter the Atelier</button>
+<button class="bg-surface/10 backdrop-blur-md text-surface px-8 py-4 rounded-lg font-bold text-lg border border-surface/20 hover:bg-surface/20 transition-colors">Browse Essays</button>
+</div>
+</div>
+</section>
+<!-- Today's Big Question -->
+<section class="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7">
+<div class="flex items-center gap-4 mb-6">
+<div class="h-px w-12 bg-secondary"></div>
+<span class="font-label text-xs uppercase tracking-[0.2em] text-secondary">Today's Inquiry</span>
+</div>
+<h2 class="font-headline text-4xl md:text-5xl italic text-primary leading-tight mb-6">Can we maintain intellectual rigor in an age of instant gratification?</h2>
+<div class="border-l-4 border-secondary pl-6 mb-8 italic text-on-surface-variant text-xl serif-text">
+                        "The mind is not a vessel to be filled, but a fire to be kindled." — Plutarch
+                    </div>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-8">
+                        Our current discourse is fractured by speed. Join 1,200 thinkers today as we deconstruct the tension between digital efficiency and the slow, deliberate work of understanding.
+                    </p>
+<a class="inline-flex items-center gap-2 text-primary font-bold hover:text-secondary transition-colors group" href="discussions.html">
+                        Join the Dialogue
+                        <span class="material-symbols-outlined group-translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<div class="lg:col-span-5 aspect-[4/5] rounded-xl overflow-hidden shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="Close up of a fountain pen nib touching parchment paper, dramatic shadows, moody and intellectual vibe" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDLkg1aJb3unQP87b68ofMC9QkwA2SDdS-o2wXRlueJ0oi3qjzdD2-MH0065LINH_5LESaQQhouq9xX4CpGSN7r-eEe9_VI4K_GnHgSxyc6RoXigbnu3EtrB585SEbX1KfacsYxDSthTmxnZ-uZXuDbJVKZ2KnUlTBMY5CCDS0lkRf3EmF_X3NXdFOn-lnDvBwoyOZARmtP8UUYPeEzBsodAjPUHWZx7L1AbVZhL5XQGrzCFLH_BIQoT3FHLwr6eGnPqVnHDCa_lTi"/>
+</div>
+</section>
+<!-- Impact & Testimonials (Asymmetric Bento) -->
+<section class="mb-24">
+<div class="mb-12">
+<h3 class="font-headline text-3xl italic mb-2">Resonance &amp; Impact</h3>
+<div class="w-16 h-1 bg-surface-container-highest"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Stat Card -->
+<div class="bg-surface-container-low p-10 flex flex-col justify-between aspect-square">
+<div class="text-6xl font-headline italic text-primary">12k+</div>
+<div>
+<h4 class="font-bold text-lg mb-2">Deep Essays Published</h4>
+<p class="text-on-surface-variant text-sm">Long-form pieces that prioritize depth over clicks.</p>
+</div>
+</div>
+<!-- Large Testimonial -->
+<div class="bg-primary text-surface p-10 md:col-span-2 flex flex-col justify-center relative overflow-hidden">
+<span class="material-symbols-outlined absolute -top-8 -right-8 text-surface/5 text-[15rem]" data-icon="format_quote">format_quote</span>
+<p class="font-headline text-2xl md:text-3xl italic leading-relaxed mb-8 relative z-10">
+                            "The Reader's Mind is the only place left on the internet that feels like a quiet library at midnight. It's where I go when I'm tired of the noise."
+                        </p>
+<div class="flex items-center gap-4 relative z-10">
+<div class="w-12 h-12 rounded-full bg-secondary"></div>
+<div>
+<p class="font-bold">Julian Vane</p>
+<p class="text-surface-variant/60 text-sm">Philosopher &amp; Author</p>
+</div>
+</div>
+</div>
+<!-- Another Stat -->
+<div class="bg-surface-container-highest p-10 flex flex-col justify-between aspect-square">
+<div class="text-6xl font-headline italic text-secondary">42m</div>
+<div>
+<h4 class="font-bold text-lg mb-2">Average Reading Time</h4>
+<p class="text-on-surface-variant text-sm">Our community engages deeply, not just skims.</p>
+</div>
+</div>
+<!-- Secondary Card -->
+<div class="bg-secondary text-on-secondary p-10 flex flex-col justify-center">
+<h4 class="font-headline text-2xl italic mb-4">Cultivated Diversity</h4>
+<p class="text-sm opacity-90 leading-relaxed">From Oxford scholars to urban poets, the Atelier thrives on the collision of disparate perspectives.</p>
+</div>
+<!-- Image Card -->
+<div class="rounded-xl overflow-hidden h-full">
+<img class="w-full h-full object-cover" data-alt="Stacks of old books with weathered pages, soft natural light from a window, peaceful reading atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrb0Ncb0U_CGpykJshfBAfR3K103OceRNAA93kUNH-Iu1CGfkUakDJdxWIRVIHYm9Kibfs-KjdOqZCz5wC0pRIHN8uoEpd0BSlXTjhuF83NEVLdcPj9c_7B7GpTisYm91jH0gC8dY8ZChjdqYmDZxjQLw7cWmx-lgiJtxom36KTqQs5upEbtyfjC9OiZv019NcLFzmu0PcceMiqf3J9Z2Gf5DI5S2wRe9FuD5TKvBZDyidUh6zmZtW2VlljtaLe7ArZIDe1Xjvawk7"/>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="py-20 text-center border-t border-outline-variant/10">
+<h2 class="font-headline text-4xl md:text-6xl italic text-primary mb-8">Ready to join the discussion?</h2>
+<p class="font-body text-on-surface-variant max-w-xl mx-auto mb-12 text-lg">We are currently accepting invitations for our next cohort of thinkers. Secure your place in the Atelier today.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<input class="bg-surface-container-low border-0 border-b border-outline-variant focus:ring-0 focus:border-secondary px-6 py-4 w-full max-w-xs text-primary font-body" placeholder="Enter your email" type="email"/>
+<button class="bg-primary text-on-primary px-10 py-4 font-bold hover:bg-primary-container transition-colors">Request Access</button>
+</div>
+</section>
+</main>
+</div>
+<!-- Footer -->
+<footer class="w-full py-12 border-t border-[#002147]/10 bg-[#fdfcfb] dark:bg-[#000a1e] font-['Manrope'] text-xs uppercase tracking-widest text-[#002147] dark:text-[#fdfcfb]">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 gap-8 max-w-screen-2xl mx-auto">
+<div class="flex flex-col gap-2">
+<span class="font-['Newsreader'] text-lg normal-case italic">The Reader's Mind</span>
+<p class="opacity-60">© 2024 The Reader's Mind. Crafted for discourse.</p>
+</div>
+<div class="flex gap-8 flex-wrap justify-center">
+<a class="opacity-60 hover:opacity-100 hover:underline transition-all" href="#">Community Guidelines</a>
+<a class="opacity-60 hover:opacity-100 hover:underline transition-all" href="#">About the Atelier</a>
+<a class="opacity-60 hover:opacity-100 hover:underline transition-all" href="#">Privacy Policy</a>
+<a class="opacity-60 hover:opacity-100 hover:underline transition-all" href="#">Contact</a>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,700;1,400;1,700&amp;family=Manrope:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-on-surface": "#f4f1e8",
+                    "secondary-container": "#ff775f",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed-variant": "#882010",
+                    "tertiary-container": "#2b2009",
+                    "background": "#fcf9f0",
+                    "inverse-primary": "#aec7f6",
+                    "inverse-surface": "#31312b",
+                    "surface": "#fcf9f0",
+                    "surface-container-low": "#f6f3ea",
+                    "surface-variant": "#e5e2da",
+                    "on-tertiary-fixed-variant": "#52452b",
+                    "tertiary-fixed": "#f5e0bd",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#710e03",
+                    "secondary-fixed": "#ffdad4",
+                    "tertiary": "#110a00",
+                    "primary": "#000a1e",
+                    "surface-container-highest": "#e5e2da",
+                    "surface-container-high": "#ebe8df",
+                    "on-primary-container": "#708ab5",
+                    "surface-tint": "#465f88",
+                    "on-tertiary-container": "#988768",
+                    "on-surface": "#1c1c17",
+                    "primary-fixed-dim": "#aec7f6",
+                    "primary-fixed": "#d6e3ff",
+                    "on-background": "#1c1c17",
+                    "surface-dim": "#dddad1",
+                    "primary-container": "#002147",
+                    "on-tertiary": "#ffffff",
+                    "on-surface-variant": "#44474e",
+                    "outline": "#74777f",
+                    "on-error": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#3f0300",
+                    "on-tertiary-fixed": "#241a05",
+                    "tertiary-fixed-dim": "#d8c4a2",
+                    "secondary": "#a83725",
+                    "surface-bright": "#fcf9f0",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed-variant": "#2d476f",
+                    "secondary-fixed-dim": "#ffb4a6",
+                    "outline-variant": "#c4c6cf",
+                    "on-primary-fixed": "#001b3d",
+                    "surface-container": "#f1eee5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .serif-italic { font-family: 'Newsreader'; font-style: italic; }
+        .glass-nav { backdrop-filter: blur(20px); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- Top Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 bg-[#fdfcfb]/80 dark:bg-[#000a1e]/80 backdrop-blur-md transition-colors duration-300 shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center px-8 h-20 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-12">
+<span class="text-2xl font-bold font-['Newsreader'] text-[#002147] dark:text-[#fdfcfb] italic tracking-tight">The Reader's Mind</span>
+<div class="hidden md:flex items-center gap-8 font-['Newsreader'] italic tracking-tight">
+<a class="text-[#a83725] border-b-2 border-[#a83725] pb-1 hover:text-[#a83725] transition-all duration-200" href="index.html">Essays</a>
+<a class="text-[#002147]/70 dark:text-[#fdfcfb]/70 hover:text-[#a83725] transition-all duration-200" href="discussions.html">Dialogues</a>
+<a class="text-[#002147]/70 dark:text-[#fdfcfb]/70 hover:text-[#a83725] transition-all duration-200" href="index.html">Archive</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-[#002147] dark:text-[#fdfcfb] scale-95 active:scale-90" data-icon="notifications">notifications</button>
+<img alt="User profile" class="w-10 h-10 rounded-full object-cover" data-alt="close-up portrait of a thoughtful man with glasses in an academic setting with soft natural window light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDA0b2KSlKe0PywfikbRM8iI1U-sQsshVvuaPf7ux7P-C3vttzC4jdEO-3HbWsjul9gzgveEaFdjp1TyGcvjecOdM3pRU9xlfrAnjcZOA-FXHGDk9hjBlumbrSJW4R4Sfel4ZI7k2pdeQZLCvZChzy6OwVvBnp9zCwMfns6sAtp9KSt7uOVENX2TzKUXw_UaM5HMJRT9b7Gc6kcdgDoRyL1MuqkJw_ihq1Xigft_avEhCIuKv8FINX3TpWzwQRSy5EeHM84yfo2TnPt"/>
+</div>
+</div>
+</nav>
+<div class="flex max-w-screen-2xl mx-auto pt-20">
+<!-- Left Sidebar: Categories (Hidden on Mobile) -->
+<aside class="hidden lg:flex flex-col gap-4 px-6 h-screen w-64 pt-12 sticky top-20 bg-[#fdfcfb] dark:bg-[#000a1e] font-['Manrope'] font-medium text-sm">
+<div class="mb-8 px-2">
+<h3 class="text-xs uppercase tracking-widest text-on-surface-variant mb-1">The Atelier</h3>
+<p class="text-[10px] text-on-surface-variant/60">Curated Categories</p>
+</div>
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-[#002147]/60 dark:text-[#fdfcfb]/60 hover:bg-[#002147]/5 dark:hover:bg-[#fdfcfb]/5 translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span> Trending
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#a83725] font-bold border-r-4 border-[#a83725] bg-[#a83725]/5 translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span> Philosophy
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#002147]/60 dark:text-[#fdfcfb]/60 hover:bg-[#002147]/5 dark:hover:bg-[#fdfcfb]/5 translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="palette">palette</span> Art History
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#002147]/60 dark:text-[#fdfcfb]/60 hover:bg-[#002147]/5 dark:hover:bg-[#fdfcfb]/5 translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span> Modernity
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#002147]/60 dark:text-[#fdfcfb]/60 hover:bg-[#002147]/5 dark:hover:bg-[#fdfcfb]/5 translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="gavel">gavel</span> Politics
+                </a>
+</div>
+<button class="mt-8 mx-2 bg-primary text-on-primary py-3 px-4 rounded transition-all hover:bg-primary/90">Start a Discussion</button>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 bg-surface px-6 md:px-12 lg:px-24 py-12">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 text-xs font-label uppercase tracking-widest text-on-surface-variant/60 mb-12">
+<a class="hover:text-primary transition-colors" href="index.html">Archive</a>
+<span class="material-symbols-outlined text-[12px]" data-icon="chevron_right">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Philosophy</a>
+<span class="material-symbols-outlined text-[12px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-on-surface">The Stoic Paradox</span>
+</nav>
+<!-- Main Topic / Essay -->
+<article class="max-w-3xl mx-auto">
+<header class="mb-16">
+<h1 class="text-5xl md:text-6xl font-headline font-bold text-primary italic tracking-tight mb-8">
+                        The Stoic Paradox: Reconciling Modern Ambition with Inner Stillness
+                    </h1>
+<div class="flex items-center gap-4 border-l-4 border-secondary pl-6 py-2">
+<img alt="Elena Vance" class="w-12 h-12 rounded object-cover" data-alt="soft-lit portrait of a professional woman in a linen shirt looking pensively away from camera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_2ygOGBSCBp1zveGJDsTDfRNvIE6OFV56Nsno1eIWvEizGCezYXi9m4S63qWSDhX3o7q53L0RslQgsoR-07DCmBR0uYKgwTdHclllv2LFGPjzHKlVdKsvIclkJlBrBf4EUQLRMf88-TynFYHIiGLB78rhs5BeYSg0zCXSUH4Na9k4cQNRJrf8-om9ikmfaGoDk_91K6uT-jJVyAuZU8IExyAvU12C85FoAIvmgxH4mqS34TBt2-8vY8vJ8AS56D4cUjRifIW7x08w"/>
+<div>
+<p class="font-bold text-primary">Elena Vance</p>
+<p class="text-sm text-on-surface-variant">Senior Fellow at the Atelier • 12 min read</p>
+</div>
+</div>
+</header>
+<div class="prose prose-lg font-body text-on-surface leading-relaxed space-y-8">
+<p class="text-xl italic font-headline text-on-surface-variant">
+                        "If you are distressed by anything external, the pain is not due to the thing itself, but to your estimate of it; and this you have the power to revoke at any moment."
+                    </p>
+<p>
+                        Marcus Aurelius wrote these words in his private journal nearly two millennia ago, yet they echo with startling clarity in our hyper-connected, results-obsessed era. The modern paradox lies in our desire to achieve—to build, to scale, to leave a mark—while simultaneously longing for the unshakeable peace promised by Stoicism.
+                    </p>
+<div class="my-12 relative">
+<img alt="Classical Statue" class="w-full aspect-[16/9] object-cover rounded shadow-sm" data-alt="marble bust of a classical greek philosopher with dramatic shadows and warm sunlight streaming across the stone texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEbrsptodkeRCoi3N03G4ddhAaKleeijxPzzcKrTgTa6cBex4rfPusPGvYR8cfkLO1ye3Ls8chd4s1quE0fRXJ-ZyXfDUg4s3d7_uon_iwarl62egaHcmE5Xv13UmvZShw7OHd2AkJ1kVVcH9H0s5FTr8eJjf-M0EUegYd7fCoEdhZV81D0mu3c5z33Am6JhnFuZynN6yONEQJzjeUVUO7-ECIuWbUJVTEwuYvlZ6Yp_4h_pWbPe42YhGr-j6_MkhfgcssQLfUCq7U"/>
+<p class="text-xs font-label uppercase tracking-widest text-on-surface-variant mt-4 text-center">
+                            Fig 1. The silence of the marble remains unchanged by time.
+                        </p>
+</div>
+<p>
+                        Is it possible to pursue a high-stakes career in the digital age while maintaining a radical indifference to the outcome? The Atelier's community has often debated the 'Preferred Indifferents'—the concept that wealth and health are good to have, but not essential for a virtuous life. But can a founder truly say their startup's success is a 'preferred indifferent'?
+                    </p>
+<p>
+                        To explore this, we must look at the dichotomy of control. Our intent is within our power; the market's reaction is not.
+                    </p>
+</div>
+<div class="mt-20 pt-12 border-t-2 border-surface-container-high flex justify-between items-center">
+<div class="flex gap-4">
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-container-low hover:bg-surface-container-high transition-colors text-primary rounded">
+<span class="material-symbols-outlined" data-icon="thumb_up">thumb_up</span>
+<span class="font-label text-sm">428</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-container-low hover:bg-surface-container-high transition-colors text-primary rounded">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+<span class="font-label text-sm">Export</span>
+</button>
+</div>
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-surface-container-highest"></div>
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-secondary text-[10px] flex items-center justify-center text-on-secondary font-bold">+12</div>
+</div>
+</div>
+</article>
+<!-- Threaded Comments Section -->
+<section class="max-w-3xl mx-auto mt-24">
+<div class="flex items-center justify-between mb-12">
+<h2 class="text-3xl font-headline font-bold italic text-primary">Dialogues (24)</h2>
+<div class="flex items-center gap-2 text-xs font-label uppercase tracking-widest text-on-surface-variant">
+<span>Sort by:</span>
+<button class="text-primary font-bold hover:underline">Intellectual Depth</button>
+</div>
+</div>
+<div class="space-y-10">
+<!-- Comment 1 -->
+<div class="group">
+<div class="bg-surface-container-low p-8 rounded-lg border-l-4 border-surface-container-high transition-colors hover:bg-surface-container-high">
+<div class="flex items-center gap-4 mb-4">
+<img alt="Julian Thorne" class="w-10 h-10 rounded object-cover" data-alt="portrait of an older man with graying beard and intelligent eyes in a dark library setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAa0Y5UU27k4BrjX0_MYkA6ZFzcaLlIr1Z82L1PdvZjO1Ynzb3tbLLc6GeszEwjrxAHZJKryid9RjyWWpuki64Ka1qqd_iMithszFpyrSjdX2kaXWskoLW4MEnwABsi7Dn8UBs52jL9nhnOwjboYMOU83tN3JHI6R5mrWJilEl9FmDpj-HDxtvWBgjLieet0csZn8eJPR0MPiykhhhVgu0Cj2htmBFhhYn3CYxIWW4NqK3EMEWPPsVUcHpmnxDtGtWLqaupj9hCdF-1"/>
+<div>
+<p class="font-bold text-primary text-sm">Julian Thorne</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest">Architect of Theory • 2h ago</p>
+</div>
+</div>
+<p class="text-on-surface leading-relaxed mb-6">
+                                The friction Elena describes is exactly why modern 'Stoicism' often feels like a life-hack rather than a philosophy. We try to use Stoicism to get what we want, rather than to be okay with whatever happens. Paradoxically, if you use Stoic tools to achieve ambition, you've already failed the core tenet.
+                            </p>
+<div class="flex gap-6 items-center">
+<button class="text-xs font-label uppercase tracking-widest text-secondary hover:underline">Refute</button>
+<button class="text-xs font-label uppercase tracking-widest text-on-surface-variant hover:text-primary">Affirm (12)</button>
+<button class="text-xs font-label uppercase tracking-widest text-on-surface-variant hover:text-primary">Cite</button>
+</div>
+</div>
+<!-- Nested Thread -->
+<div class="ml-12 mt-6 pl-8 border-l-2 border-surface-container-high">
+<div class="bg-surface p-6 rounded transition-colors hover:bg-surface-container-low">
+<div class="flex items-center gap-4 mb-3">
+<img alt="Sarah Chen" class="w-8 h-8 rounded object-cover" data-alt="young professional woman smiling warmly in a bright modern workspace" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdxpV6e_RJ8zgHKauZSCI0KbSch04sh6xenfe85eblYTzY2WDMAofD3qsjn59KD5ScZD44_nv3kz09JEezgmK_Cil0QdZ_R9XSzOZRMdyYZoYqSs6iUxWIP0mFGWLE5WnCHtzDLseQgbsO2b3fImEJ7LRzNiIeQ4FVZWKpJNDgOxtPnt9kZNYamPm6LW7GcIDB4ZJOeHKRJQtpGp6fwJTOH06u68WAwPoPNjvssJO5s6RskOgArhF3lbM7jNBKKHS7W4V1VhswraI6"/>
+<div>
+<p class="font-bold text-primary text-xs">Sarah Chen</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest">Contributor • 1h ago</p>
+</div>
+</div>
+<p class="text-sm text-on-surface leading-relaxed">
+                                    Julian, don't you think there's a middle ground? Zeno himself was a merchant. One can pursue the craft (the 'techne' of living) with excellence while remaining detached from the cargo.
+                                </p>
+</div>
+</div>
+</div>
+<!-- Comment 2 -->
+<div class="bg-surface-container-low p-8 rounded-lg border-l-4 border-surface-container-high transition-colors hover:bg-surface-container-high">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-10 h-10 bg-primary-container text-on-primary-container flex items-center justify-center rounded font-headline italic">M</div>
+<div>
+<p class="font-bold text-primary text-sm">Marcus K.</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest">Observer • 4h ago</p>
+</div>
+</div>
+<p class="text-on-surface leading-relaxed mb-6">
+                            This essay resonates deeply. I find that the most difficult part is not the indifference to failure, but the indifference to praise. In a world of digital metrics, praise is the loudest distraction.
+                        </p>
+<div class="flex gap-6 items-center">
+<button class="text-xs font-label uppercase tracking-widest text-secondary hover:underline">Refute</button>
+<button class="text-xs font-label uppercase tracking-widest text-on-surface-variant hover:text-primary">Affirm (5)</button>
+</div>
+</div>
+</div>
+<!-- Join the Conversation Section -->
+<div class="mt-24 mb-32">
+<h3 class="text-xl font-headline font-bold text-primary mb-8 italic">Contribute to the Dialogue</h3>
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border-b-2 border-surface-container-high">
+<div class="flex gap-6">
+<img alt="User profile" class="w-12 h-12 rounded object-cover" data-alt="close-up portrait of a thoughtful man with glasses in an academic setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNiipnHOSVuZ0CAMCA1q2Mx8nEf4YZDOcAYOZYJcOMRVK2E66owGIH9tgQW68B3v6wBSo0k1wqp4gUHn4IxJ6frZBflaXY7L6qoo7HE_mkN225TiHw_j5inZpSZaNzlxsYrlqSsR7n52iR_McW-jZHRambI8EAiV_PuAp36YqZJZYDmCeKNRx5o6CLGR1c_J9T4ojdo2VFjPEV_PsAV2Dkeh9tFLYhEfQ9jBXtpqjDyNis6zv7d1KdNRIagScU1c4DvDdeVkROTa9m"/>
+<div class="flex-1">
+<textarea class="w-full bg-transparent border-none focus:ring-0 font-body text-lg resize-none min-h-[120px] placeholder:text-on-surface-variant/40" placeholder="Offer a perspective or a counter-point..."></textarea>
+<div class="flex justify-between items-center mt-6 pt-6 border-t border-surface-container-low">
+<div class="flex gap-4 text-on-surface-variant">
+<button class="material-symbols-outlined hover:text-secondary" data-icon="format_quote">format_quote</button>
+<button class="material-symbols-outlined hover:text-secondary" data-icon="link">link</button>
+<button class="material-symbols-outlined hover:text-secondary" data-icon="image">image</button>
+</div>
+<button class="bg-secondary text-on-secondary px-8 py-3 rounded font-label text-sm font-bold uppercase tracking-widest hover:opacity-90 transition-opacity">
+                                        Publish Contribution
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+<p class="text-center text-[10px] text-on-surface-variant/40 uppercase tracking-[0.2em] mt-8">
+                        All contributions are subject to our Community Guidelines on rigor and respect.
+                    </p>
+</div>
+</section>
+</main>
+</div>
+<!-- Footer Shell -->
+<footer class="bg-[#fdfcfb] dark:bg-[#000a1e] w-full py-12 border-t border-[#002147]/10 font-['Manrope'] text-xs uppercase tracking-widest text-[#002147] dark:text-[#fdfcfb]">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 gap-8 max-w-screen-2xl mx-auto">
+<div class="flex flex-col items-center md:items-start gap-2">
+<span class="font-['Newsreader'] text-lg italic tracking-tight">The Reader's Mind</span>
+<p class="opacity-60 text-[10px]">© 2024 The Reader's Mind. Crafted for discourse.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="opacity-60 hover:opacity-100 transition-all duration-200" href="#">Community Guidelines</a>
+<a class="opacity-60 hover:opacity-100 transition-all duration-200" href="#">About the Atelier</a>
+<a class="opacity-60 hover:opacity-100 transition-all duration-200" href="#">Privacy Policy</a>
+<a class="opacity-60 hover:opacity-100 transition-all duration-200 underline" href="#">Contact</a>
+</div>
+</div>
+</footer>
+</body></html>
