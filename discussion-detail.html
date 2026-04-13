@@ -2,6 +2,14 @@
 
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
+<script>
+  // Auth guard — redirect to login if not authenticated
+  (function() {
+    if (sessionStorage.getItem('trm_auth') !== 'true') {
+      window.location.href = 'login.html';
+    }
+  })();
+</script>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,700;1,400;1,700&amp;family=Manrope:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -296,4 +304,21 @@
 </div>
 </div>
 </footer>
+
+<script>
+  // Inject username and sign-out into nav
+  (function() {
+    const user = sessionStorage.getItem('trm_user') || 'Reader';
+    const navRight = document.querySelector('.trm-nav-right');
+    if (navRight) {
+      navRight.innerHTML = '<span class="font-[\'Manrope\'] text-sm text-[#002147]/70 hidden md:inline">Hello, <strong>' + user + '</strong></span>' +
+        '<button onclick="signOut()" class="bg-transparent border border-[#002147]/30 text-[#002147] text-sm font-[\'Manrope\'] px-4 py-1.5 rounded hover:bg-[#002147] hover:text-white transition-colors">Sign Out</button>';
+    }
+  })();
+  function signOut() {
+    sessionStorage.removeItem('trm_auth');
+    sessionStorage.removeItem('trm_user');
+    window.location.href = 'login.html';
+  }
+</script>
 </body></html>

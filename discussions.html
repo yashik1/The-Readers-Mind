@@ -2,6 +2,14 @@
 
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
+<script>
+  // Auth guard — redirect to login if not authenticated
+  (function() {
+    if (sessionStorage.getItem('trm_auth') !== 'true') {
+      window.location.href = 'login.html';
+    }
+  })();
+</script>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>The Reader's Mind | Discussion Feed</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -160,7 +168,7 @@
 <!-- Discussion Card 1 -->
 <article class="group bg-surface-container-lowest p-8 rounded-xl hover:bg-surface-container-low transition-colors duration-300 border-none">
 <div class="flex justify-between items-start mb-6">
-<div class="flex items-center gap-4">
+<div class="flex items-center gap-4 trm-nav-right">
 <a href="login.html" class="bg-[#000a1e] text-white text-sm font-['Manrope'] px-5 py-2 rounded hover:bg-[#002147] transition-colors">Sign In</a>
 
 <img alt="Author" class="w-12 h-12 rounded-lg object-cover" data-alt="Headshot of a man with a scholarly look, soft neutral background, wearing a linen shirt" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCk9mdNSjPAeiNKyHi9OURKSOWDuJrXSlMXWuMEnfeydbjfPfJXjdxrq_Vp_v5Ib2KY7zUkGl0PX_-G_wvUme3F5rEVFoWfxHK376shqit81xs67hh4HPsfP2NVqZsU4Ud2bRCBla8uDjsx8Os-M8a5rj8FdC0lWUDYRYRkvHBL-tul_duizDpc98-DeOz_Zyvj1Ss8rht4OExpDAQwBiVI6VTY-ZVxXI4T_9jbGI4arWPb0WduI5l1wts5A4InhlsTbV3W0-Fx22XQ"/>
@@ -258,4 +266,21 @@
 </div>
 </div>
 </footer>
+
+<script>
+  // Inject username and sign-out into nav
+  (function() {
+    const user = sessionStorage.getItem('trm_user') || 'Reader';
+    const navRight = document.querySelector('.trm-nav-right');
+    if (navRight) {
+      navRight.innerHTML = '<span class="font-[\'Manrope\'] text-sm text-[#002147]/70 hidden md:inline">Hello, <strong>' + user + '</strong></span>' +
+        '<button onclick="signOut()" class="bg-transparent border border-[#002147]/30 text-[#002147] text-sm font-[\'Manrope\'] px-4 py-1.5 rounded hover:bg-[#002147] hover:text-white transition-colors">Sign Out</button>';
+    }
+  })();
+  function signOut() {
+    sessionStorage.removeItem('trm_auth');
+    sessionStorage.removeItem('trm_user');
+    window.location.href = 'login.html';
+  }
+</script>
 </body></html>

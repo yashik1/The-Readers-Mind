@@ -2,6 +2,14 @@
 
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
+<script>
+  // Auth guard — redirect to login if not authenticated
+  (function() {
+    if (sessionStorage.getItem('trm_auth') !== 'true') {
+      window.location.href = 'login.html';
+    }
+  })();
+</script>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>The Reader's Mind | A Digital Atelier for High-Level Discourse</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -101,7 +109,7 @@
 <a class="text-[#002147]/70 dark:text-[#fdfcfb]/70 font-['Newsreader'] italic tracking-tight hover:text-[#a83725] transition-all duration-200" href="index.html">Archive</a>
 </div>
 </div>
-<div class="flex items-center gap-4">
+<div class="flex items-center gap-4 trm-nav-right">
 <a href="login.html" class="bg-[#000a1e] text-white text-sm font-['Manrope'] px-5 py-2 rounded hover:bg-[#002147] transition-colors">Sign In</a>
 
 <span class="material-symbols-outlined text-[#002147] dark:text-[#fdfcfb] cursor-pointer scale-95 active:scale-90" data-icon="notifications">notifications</span>
@@ -263,4 +271,21 @@
 </div>
 </div>
 </footer>
+
+<script>
+  // Inject username and sign-out into nav
+  (function() {
+    const user = sessionStorage.getItem('trm_user') || 'Reader';
+    const navRight = document.querySelector('.trm-nav-right');
+    if (navRight) {
+      navRight.innerHTML = '<span class="font-[\'Manrope\'] text-sm text-[#002147]/70 hidden md:inline">Hello, <strong>' + user + '</strong></span>' +
+        '<button onclick="signOut()" class="bg-transparent border border-[#002147]/30 text-[#002147] text-sm font-[\'Manrope\'] px-4 py-1.5 rounded hover:bg-[#002147] hover:text-white transition-colors">Sign Out</button>';
+    }
+  })();
+  function signOut() {
+    sessionStorage.removeItem('trm_auth');
+    sessionStorage.removeItem('trm_user');
+    window.location.href = 'login.html';
+  }
+</script>
 </body></html>
