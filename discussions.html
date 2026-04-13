@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-
-<html class="light" lang="en"><head>
+<html class="light" lang="en">
+<head>
 <meta charset="utf-8"/>
 <script>
-  // Auth guard — redirect to login if not authenticated
   (function() {
     if (sessionStorage.getItem('trm_auth') !== 'true') {
       window.location.href = 'login.html';
@@ -11,276 +10,594 @@
   })();
 </script>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>The Reader's Mind | Discussion Feed</title>
+<title>The Reader's Mind | Discussions</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;0,700;1,400&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "inverse-on-surface": "#f4f1e8",
-                        "secondary-container": "#ff775f",
-                        "on-secondary": "#ffffff",
-                        "on-secondary-fixed-variant": "#882010",
-                        "tertiary-container": "#2b2009",
-                        "background": "#fcf9f0",
-                        "inverse-primary": "#aec7f6",
-                        "inverse-surface": "#31312b",
-                        "surface": "#fcf9f0",
-                        "surface-container-low": "#f6f3ea",
-                        "surface-variant": "#e5e2da",
-                        "on-tertiary-fixed-variant": "#52452b",
-                        "tertiary-fixed": "#f5e0bd",
-                        "on-primary": "#ffffff",
-                        "on-secondary-container": "#710e03",
-                        "secondary-fixed": "#ffdad4",
-                        "tertiary": "#110a00",
-                        "primary": "#000a1e",
-                        "surface-container-highest": "#e5e2da",
-                        "surface-container-high": "#ebe8df",
-                        "on-primary-container": "#708ab5",
-                        "surface-tint": "#465f88",
-                        "on-tertiary-container": "#988768",
-                        "on-surface": "#1c1c17",
-                        "primary-fixed-dim": "#aec7f6",
-                        "primary-fixed": "#d6e3ff",
-                        "on-background": "#1c1c17",
-                        "surface-dim": "#dddad1",
-                        "primary-container": "#002147",
-                        "on-tertiary": "#ffffff",
-                        "on-surface-variant": "#44474e",
-                        "outline": "#74777f",
-                        "on-error": "#ffffff",
-                        "error-container": "#ffdad6",
-                        "on-error-container": "#93000a",
-                        "surface-container-lowest": "#ffffff",
-                        "on-secondary-fixed": "#3f0300",
-                        "on-tertiary-fixed": "#241a05",
-                        "tertiary-fixed-dim": "#d8c4a2",
-                        "secondary": "#a83725",
-                        "surface-bright": "#fcf9f0",
-                        "error": "#ba1a1a",
-                        "on-primary-fixed-variant": "#2d476f",
-                        "secondary-fixed-dim": "#ffb4a6",
-                        "outline-variant": "#c4c6cf",
-                        "on-primary-fixed": "#001b3d",
-                        "surface-container": "#f1eee5"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
-                    "fontFamily": {
-                        "headline": ["Newsreader"],
-                        "body": ["Manrope"],
-                        "label": ["Manrope"]
-                    }
-                },
-            },
-        }
-    </script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#000a1e", "primary-container": "#002147", "secondary": "#a83725",
+          "surface": "#fcf9f0", "surface-container-low": "#f6f3ea",
+          "surface-container": "#f1eee5", "surface-container-high": "#ebe8df",
+          "surface-container-highest": "#e5e2da", "surface-container-lowest": "#ffffff",
+          "on-surface": "#1c1c17", "on-surface-variant": "#44474e", "outline-variant": "#c4c6cf",
+          "secondary-fixed": "#ffdad4", "on-secondary-container": "#710e03",
+          "secondary-fixed-dim": "#ffb4a6", "background": "#fcf9f0",
+        },
+        fontFamily: { headline: ["Newsreader"], body: ["Manrope"], label: ["Manrope"] },
+        borderRadius: { DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem" },
+      },
+    },
+  };
+</script>
 <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        body { font-family: 'Manrope', sans-serif; }
-        h1, h2, h3, .serif { font-family: 'Newsreader', serif; }
-        .glass-nav { backdrop-filter: blur(12px); }
-    </style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  body { font-family: 'Manrope', sans-serif; }
+  .serif { font-family: 'Newsreader', serif; }
+  .glass-nav { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+  .filter-btn.active { background: white; box-shadow: 0 1px 4px rgba(0,0,0,0.08); color: #000a1e; font-weight: 700; }
+  .filter-btn { transition: all 0.15s; }
+  .tag-btn.active { background: #000a1e; color: white; }
+  .tag-btn { transition: all 0.15s; cursor: pointer; }
+  .cat-link.active { color: #a83725; font-weight: 700; border-right: 4px solid #a83725; background: rgba(168,55,37,0.05); }
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,10,30,0.5); backdrop-filter: blur(4px); z-index: 100; align-items: center; justify-content: center; }
+  .modal-overlay.open { display: flex; }
+  .discussion-card { display: none; }
+  .discussion-card.visible { display: block; }
+</style>
 </head>
 <body class="bg-background text-on-surface">
-<!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 bg-[#fdfcfb]/80 dark:bg-[#000a1e]/80 backdrop-blur-md shadow-sm dark:shadow-none transition-colors duration-300 h-20 border-none">
-<div class="flex justify-between items-center px-8 h-full max-w-screen-2xl mx-auto">
-<div class="flex items-center gap-12">
-<span class="text-2xl font-bold font-['Newsreader'] italic tracking-tight text-[#002147] dark:text-[#fdfcfb]">The Reader's Mind</span>
-<div class="hidden md:flex gap-8">
-<a class="text-[#002147]/70 dark:text-[#fdfcfb]/70 hover:text-[#a83725] transition-all duration-200 font-['Newsreader'] italic" href="index.html">Essays</a>
-<a class="text-[#a83725] border-b-2 border-[#a83725] pb-1 font-['Newsreader'] italic" href="discussions.html">Dialogues</a>
-<a class="text-[#002147]/70 dark:text-[#fdfcfb]/70 hover:text-[#a83725] transition-all duration-200 font-['Newsreader'] italic" href="index.html">Archive</a>
-</div>
-</div>
-<div class="flex items-center gap-6">
-<span class="material-symbols-outlined text-[#002147] cursor-pointer scale-95 active:scale-90">notifications</span>
-<img alt="User profile" class="w-10 h-10 rounded-full object-cover" data-alt="Close up portrait of an intellectual man with glasses and a thoughtful expression, soft library lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCiM9JU_zp1y4IWEABzk_17f0GHvR0lwF--SH_DO-hp1iW4gyNj451G1Mhw4vP8DrVbU5xhzS13OD36SGxHlYJ8lMRa6aYRgl9euSGUCKgxk9lX80A_fS-cSrcV-p30dGW88zfLtLNYuSI1cxt3QMQ5Jvt_KvpHXxdz83l1gS6u4tBPA51Q16tWSTcOl7-NLXOk20-Zr2CysjrQMvTqvsZlCd5vgaToCF1-tDHB26u1-G8hM6MhWevjmnSzW6v5wAZZPniOdt9epTi"/>
-</div>
-</div>
-</nav>
-<div class="flex max-w-screen-2xl mx-auto pt-20 min-h-screen">
-<!-- SideNavBar -->
-<aside class="hidden md:flex flex-col gap-4 px-6 h-[calc(100vh-5rem)] w-64 fixed bg-[#fdfcfb] dark:bg-[#000a1e] border-none">
-<div class="pt-8 mb-8">
-<div class="flex items-center gap-3 mb-2">
-<img alt="Curator avatar" class="w-8 h-8 rounded-lg object-cover" data-alt="Professional woman curator with a minimalist aesthetic, warm natural light from a window" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMk8xpCvdp0sJ9siCMM6WhXhxoUg0fUrVYza2Qj_7q-Fg7kFj6Mza-VYzhxU4-VnIQ7sdYWIqjlYVMVl4AAybWmEdp1DtcyozS1VmA4o6IgTzkARinYjVBdvijmx-ESW4Dx6jNY8sWOjZaJHeM6TxVwUyEgPyBBTuZQTlTFjGl-hAAHp9CZSfGZiFQkjegEhbKavcNR9QawyxHHsRzjzWhoxP6GbGt0Rs_6GQ3d6rqjgd5MOtAU0mL1nCIGXvixupYIyfpPJvakCIA"/>
-<span class="font-headline italic text-lg text-[#002147]">The Atelier</span>
-</div>
-<p class="text-xs font-label uppercase tracking-widest text-[#002147]/60">Curated Categories</p>
-</div>
-<nav class="flex flex-col gap-1">
-<a class="flex items-center gap-3 px-4 py-3 text-[#002147]/60 hover:bg-[#002147]/5 transition-transform translate-x-1 font-medium text-sm" href="discussions.html">
-<span class="material-symbols-outlined">trending_up</span> Trending
-                </a>
-<a class="flex items-center gap-3 px-4 py-3 text-[#a83725] font-bold border-r-4 border-[#a83725] bg-[#a83725]/5 font-medium text-sm" href="discussions.html">
-<span class="material-symbols-outlined">auto_stories</span> Philosophy
-                </a>
-<a class="flex items-center gap-3 px-4 py-3 text-[#002147]/60 hover:bg-[#002147]/5 transition-transform translate-x-1 font-medium text-sm" href="discussions.html">
-<span class="material-symbols-outlined">palette</span> Art History
-                </a>
-<a class="flex items-center gap-3 px-4 py-3 text-[#002147]/60 hover:bg-[#002147]/5 transition-transform translate-x-1 font-medium text-sm" href="discussions.html">
-<span class="material-symbols-outlined">auto_awesome</span> Modernity
-                </a>
-<a class="flex items-center gap-3 px-4 py-3 text-[#002147]/60 hover:bg-[#002147]/5 transition-transform translate-x-1 font-medium text-sm" href="discussions.html">
-<span class="material-symbols-outlined">gavel</span> Politics
-                </a>
-</nav>
-<button class="mt-8 bg-secondary text-on-secondary px-6 py-3 rounded-lg font-label font-bold text-sm scale-95 active:scale-90 transition-all">
-                Start a Discussion
-            </button>
-</aside>
-<!-- Main Content Area -->
-<main class="flex-1 md:ml-64 px-8 py-12 bg-surface">
-<header class="max-w-3xl mb-12">
-<h1 class="text-5xl font-bold italic tracking-tight text-primary mb-4">Philosophy Dialogues</h1>
-<p class="text-on-surface-variant font-body text-lg leading-relaxed">Engage with deep explorations of classical thought and contemporary logic. The floor is open for rigorous inquiry.</p>
-</header>
-<!-- Filters -->
-<div class="flex flex-wrap items-center gap-6 mb-12 border-none">
-<div class="flex bg-surface-container-low p-1 rounded-xl">
-<button class="px-6 py-2 bg-surface-container-lowest shadow-sm rounded-lg text-sm font-semibold text-primary">Trending</button>
-<button class="px-6 py-2 text-sm font-semibold text-on-surface-variant hover:text-primary transition-colors">New</button>
-<button class="px-6 py-2 text-sm font-semibold text-on-surface-variant hover:text-primary transition-colors">By Category</button>
-</div>
-<div class="h-8 w-px bg-outline-variant/30"></div>
-<div class="flex gap-2">
-<span class="px-3 py-1 bg-surface-container rounded-full text-xs font-label text-on-surface-variant">Stoicism</span>
-<span class="px-3 py-1 bg-surface-container rounded-full text-xs font-label text-on-surface-variant">Logic</span>
-<span class="px-3 py-1 bg-surface-container rounded-full text-xs font-label text-on-surface-variant">Ethics</span>
-</div>
-</div>
-<!-- Discussion List -->
-<div class="flex flex-col gap-8 max-w-4xl">
-<!-- Discussion Card 1 -->
-<article class="group bg-surface-container-lowest p-8 rounded-xl hover:bg-surface-container-low transition-colors duration-300 border-none">
-<div class="flex justify-between items-start mb-6">
-<div class="flex items-center gap-4 trm-nav-right">
-<a href="login.html" class="bg-[#000a1e] text-white text-sm font-['Manrope'] px-5 py-2 rounded hover:bg-[#002147] transition-colors">Sign In</a>
 
-<img alt="Author" class="w-12 h-12 rounded-lg object-cover" data-alt="Headshot of a man with a scholarly look, soft neutral background, wearing a linen shirt" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCk9mdNSjPAeiNKyHi9OURKSOWDuJrXSlMXWuMEnfeydbjfPfJXjdxrq_Vp_v5Ib2KY7zUkGl0PX_-G_wvUme3F5rEVFoWfxHK376shqit81xs67hh4HPsfP2NVqZsU4Ud2bRCBla8uDjsx8Os-M8a5rj8FdC0lWUDYRYRkvHBL-tul_duizDpc98-DeOz_Zyvj1Ss8rht4OExpDAQwBiVI6VTY-ZVxXI4T_9jbGI4arWPb0WduI5l1wts5A4InhlsTbV3W0-Fx22XQ"/>
-<div>
-<h4 class="font-label font-bold text-sm text-primary">Dr. Julian Vance</h4>
-<span class="text-xs text-on-surface-variant">Fellow of Epistemology • 2h ago</span>
+<!-- Top Nav -->
+<nav class="glass-nav fixed top-0 w-full z-50 bg-[#fdfcfb]/85 border-b border-outline-variant/20 h-20">
+  <div class="flex justify-between items-center px-8 h-full max-w-screen-2xl mx-auto">
+    <div class="flex items-center gap-10">
+      <a href="index.html"><span class="text-2xl font-bold serif text-[#002147] italic tracking-tight">The Reader's Mind</span></a>
+      <div class="hidden md:flex gap-8">
+        <a class="text-[#002147]/70 serif italic hover:text-[#a83725] transition-colors" href="index.html">Essays</a>
+        <a class="text-[#a83725] border-b-2 border-[#a83725] pb-1 serif italic" href="discussions.html">Dialogues</a>
+        <a class="text-[#002147]/70 serif italic hover:text-[#a83725] transition-colors" href="index.html">Archive</a>
+      </div>
+    </div>
+    <!-- Nav right: injected by JS -->
+    <div id="nav-right" class="flex items-center gap-4"></div>
+  </div>
+</nav>
+
+<div class="flex max-w-screen-2xl mx-auto pt-20 min-h-screen">
+
+  <!-- Sidebar -->
+  <aside class="hidden md:flex flex-col gap-4 px-6 h-[calc(100vh-5rem)] w-64 fixed bg-[#fdfcfb] top-20 overflow-y-auto">
+    <div class="pt-8 mb-4">
+      <div class="flex items-center gap-3 mb-1">
+        <div class="w-8 h-8 rounded-lg bg-[#002147] flex items-center justify-center">
+          <span class="material-symbols-outlined text-white text-sm">palette</span>
+        </div>
+        <span class="serif italic text-[#002147] text-lg font-bold">The Atelier</span>
+      </div>
+      <p class="text-xs uppercase tracking-widest text-[#002147]/50 ml-11">Categories</p>
+    </div>
+    <nav class="flex flex-col gap-1" id="category-nav">
+      <a class="cat-link active flex items-center gap-3 px-4 py-3 rounded-l text-sm transition-all" href="#" data-cat="all" onclick="filterCategory('all',this);return false;">
+        <span class="material-symbols-outlined text-base">trending_up</span> Trending
+      </a>
+      <a class="cat-link flex items-center gap-3 px-4 py-3 rounded-l text-sm text-[#002147]/60 hover:bg-[#002147]/5 transition-all" href="#" data-cat="philosophy" onclick="filterCategory('philosophy',this);return false;">
+        <span class="material-symbols-outlined text-base">auto_stories</span> Philosophy
+      </a>
+      <a class="cat-link flex items-center gap-3 px-4 py-3 rounded-l text-sm text-[#002147]/60 hover:bg-[#002147]/5 transition-all" href="#" data-cat="art" onclick="filterCategory('art',this);return false;">
+        <span class="material-symbols-outlined text-base">palette</span> Art History
+      </a>
+      <a class="cat-link flex items-center gap-3 px-4 py-3 rounded-l text-sm text-[#002147]/60 hover:bg-[#002147]/5 transition-all" href="#" data-cat="modernity" onclick="filterCategory('modernity',this);return false;">
+        <span class="material-symbols-outlined text-base">auto_awesome</span> Modernity
+      </a>
+      <a class="cat-link flex items-center gap-3 px-4 py-3 rounded-l text-sm text-[#002147]/60 hover:bg-[#002147]/5 transition-all" href="#" data-cat="politics" onclick="filterCategory('politics',this);return false;">
+        <span class="material-symbols-outlined text-base">gavel</span> Politics
+      </a>
+    </nav>
+    <button onclick="openModal()" class="mt-6 bg-[#a83725] text-white px-6 py-3 rounded-lg font-bold text-sm hover:bg-[#8a2d1e] transition-colors flex items-center gap-2 justify-center">
+      <span class="material-symbols-outlined text-base">add</span> Start a Discussion
+    </button>
+  </aside>
+
+  <!-- Main -->
+  <main class="flex-1 md:ml-64 px-8 py-12 bg-surface">
+    <header class="max-w-3xl mb-10">
+      <h1 id="page-title" class="text-5xl font-bold italic tracking-tight text-primary serif mb-3">All Dialogues</h1>
+      <p class="text-on-surface-variant text-lg leading-relaxed">Engage with deep explorations of classical thought and contemporary logic.</p>
+    </header>
+
+    <!-- Filters -->
+    <div class="flex flex-wrap items-center gap-4 mb-10">
+      <div class="flex bg-surface-container-low p-1 rounded-xl gap-1">
+        <button class="filter-btn active px-5 py-2 rounded-lg text-sm" data-sort="trending" onclick="sortBy('trending',this)">Trending</button>
+        <button class="filter-btn px-5 py-2 rounded-lg text-sm text-on-surface-variant hover:text-primary" data-sort="new" onclick="sortBy('new',this)">New</button>
+        <button class="filter-btn px-5 py-2 rounded-lg text-sm text-on-surface-variant hover:text-primary" data-sort="top" onclick="sortBy('top',this)">Top</button>
+      </div>
+      <div class="flex gap-2 flex-wrap">
+        <span class="tag-btn px-3 py-1 bg-surface-container rounded-full text-xs text-on-surface-variant active" data-tag="all" onclick="filterTag('all',this)">All</span>
+        <span class="tag-btn px-3 py-1 bg-surface-container rounded-full text-xs text-on-surface-variant" data-tag="stoicism" onclick="filterTag('stoicism',this)">Stoicism</span>
+        <span class="tag-btn px-3 py-1 bg-surface-container rounded-full text-xs text-on-surface-variant" data-tag="logic" onclick="filterTag('logic',this)">Logic</span>
+        <span class="tag-btn px-3 py-1 bg-surface-container rounded-full text-xs text-on-surface-variant" data-tag="ethics" onclick="filterTag('ethics',this)">Ethics</span>
+        <span class="tag-btn px-3 py-1 bg-surface-container rounded-full text-xs text-on-surface-variant" data-tag="art" onclick="filterTag('art',this)">Art</span>
+        <span class="tag-btn px-3 py-1 bg-surface-container rounded-full text-xs text-on-surface-variant" data-tag="politics" onclick="filterTag('politics',this)">Politics</span>
+      </div>
+    </div>
+
+    <!-- No results -->
+    <div id="no-results" class="hidden text-center py-20 text-on-surface-variant">
+      <span class="material-symbols-outlined text-5xl mb-4 block">search_off</span>
+      <p class="serif italic text-2xl mb-2">No discussions found</p>
+      <p class="text-sm">Try a different filter or <button onclick="openModal()" class="text-[#a83725] underline">start a new one</button>.</p>
+    </div>
+
+    <!-- Discussion List -->
+    <div class="flex flex-col gap-6 max-w-4xl" id="discussion-list">
+
+      <!-- Card 1 -->
+      <article class="discussion-card visible group bg-surface-container-lowest p-8 rounded-xl hover:bg-surface-container-low transition-colors duration-300" data-cat="philosophy" data-tags="ethics logic" data-likes="842" data-date="2">
+        <div class="flex justify-between items-start mb-5">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-lg bg-[#002147] flex items-center justify-center text-white font-bold serif text-lg">J</div>
+            <div>
+              <h4 class="font-bold text-sm text-primary">Dr. Julian Vance</h4>
+              <span class="text-xs text-on-surface-variant">Fellow of Epistemology · 2h ago</span>
+            </div>
+          </div>
+          <button onclick="toggleBookmark(this)" class="material-symbols-outlined text-outline-variant hover:text-[#a83725] transition-colors cursor-pointer text-xl">bookmark</button>
+        </div>
+        <a class="block mb-4" href="discussion-detail.html">
+          <h2 class="text-2xl font-bold serif italic text-primary group-hover:text-[#a83725] transition-colors mb-3">The Ethics of Algorithmic Determinism</h2>
+          <p class="text-on-surface-variant leading-relaxed line-clamp-2">Does the predictive nature of modern software erode the concept of free will as defined by Kant, or is it merely a more efficient mirror of our existing habits?</p>
+        </a>
+        <div class="flex gap-2 mb-4">
+          <span class="px-2 py-0.5 bg-surface-container rounded-full text-xs text-on-surface-variant">ethics</span>
+          <span class="px-2 py-0.5 bg-surface-container rounded-full text-xs text-on-surface-variant">logic</span>
+          <span class="px-2 py-0.5 bg-surface-container rounded-full text-xs text-on-surface-variant">philosophy</span>
+        </div>
+        <div class="flex items-center justify-between pt-5 border-t border-outline-variant/10">
+          <div class="flex gap-6">
+            <button onclick="likePost(this)" class="flex items-center gap-2 text-on-surface-variant hover:text-[#a83725] transition-colors">
+              <span class="material-symbols-outlined text-sm">favorite</span>
+              <span class="text-xs font-bold like-count">842</span>
+            </button>
+            <a href="discussion-detail.html" class="flex items-center gap-2 text-on-surface-variant hover:text-[#a83725] transition-colors">
+              <span class="material-symbols-outlined text-sm">forum</span>
+              <span class="text-xs font-bold">124 Replies</span>
+            </a>
+            <button onclick="sharePost('The Ethics of Algorithmic Determinism')" class="flex items-center gap-2 text-on-surface-variant hover:text-[#a83725] transition-colors">
+              <span class="material-symbols-outlined text-sm">share</span>
+              <span class="text-xs font-bold">Share</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2 — Featured -->
+      <article class="discussion-card visible bg-surface-container-low p-8 rounded-xl border-l-4 border-[#a83725]" data-cat="art" data-tags="art" data-likes="503" data-date="5">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="material-symbols-outlined text-[#a83725]" style="font-variation-settings:'FILL' 1">format_quote</span>
+          <span class="text-xs uppercase tracking-widest text-[#a83725] font-bold">Featured Discussion</span>
+        </div>
+        <a href="discussion-detail.html">
+          <h2 class="text-2xl serif italic text-primary leading-snug mb-5 hover:text-[#a83725] transition-colors">"Is the silence of the library a technical requirement for focus, or a ritualistic tether to the sacred nature of the word?"</h2>
+        </a>
+        <div class="flex gap-2 mb-5">
+          <span class="px-2 py-0.5 bg-surface-container rounded-full text-xs text-on-surface-variant">art</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-[#a83725] flex items-center justify-center text-white font-bold serif">E</div>
+            <div>
+              <p class="font-bold text-sm text-primary">Elara Thorne</p>
+              <span class="text-xs text-on-surface-variant">Literary Critic · 5h ago</span>
+            </div>
+          </div>
+          <div class="flex gap-4 items-center">
+            <button onclick="likePost(this)" class="flex items-center gap-1 text-on-surface-variant hover:text-[#a83725] transition-colors">
+              <span class="material-symbols-outlined text-sm">favorite</span>
+              <span class="text-xs font-bold like-count">503</span>
+            </button>
+            <a href="discussion-detail.html" class="px-5 py-2 bg-primary text-white rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-[#002147] transition-colors">Join Thread</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="discussion-card visible group bg-surface-container-lowest p-8 rounded-xl hover:bg-surface-container-low transition-colors duration-300" data-cat="philosophy" data-tags="stoicism ethics" data-likes="312" data-date="5">
+        <div class="flex justify-between items-start mb-5">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-lg bg-[#002147]/70 flex items-center justify-center text-white font-bold serif text-lg">M</div>
+            <div>
+              <h4 class="font-bold text-sm text-primary">Marcus Sterling</h4>
+              <span class="text-xs text-on-surface-variant">Archivist · 5h ago</span>
+            </div>
+          </div>
+          <button onclick="toggleBookmark(this)" class="material-symbols-outlined text-outline-variant hover:text-[#a83725] transition-colors cursor-pointer text-xl">bookmark</button>
+        </div>
+        <a class="block mb-4" href="discussion-detail.html">
+          <h2 class="text-2xl font-bold serif italic text-primary group-hover:text-[#a83725] transition-colors mb-3">Stoicism in the Age of Constant Interruption</h2>
+          <p class="text-on-surface-variant leading-relaxed line-clamp-2">How Marcus Aurelius might have managed a smartphone notification center. Exploring the fortress of the mind amidst the digital cacophony.</p>
+        </a>
+        <div class="flex gap-2 mb-4">
+          <span class="px-2 py-0.5 bg-surface-container rounded-full text-xs text-on-surface-variant">stoicism</span>
+          <span class="px-2 py-0.5 bg-surface-container rounded-full text-xs text-on-surface-variant">ethics</span>
+        </div>
+        <div class="flex items-center justify-between pt-5 border-t border-outline-variant/10">
+          <div class="flex gap-6">
+            <button onclick="likePost(this)" class="flex items-center gap-2 text-on-surface-variant hover:text-[#a83725] transition-colors">
+              <span class="material-symbols-outlined text-sm">favorite</span>
+              <span class="text-xs font-bold like-count">312</span>
+            </button>
+            <a href="discussion-detail.html" class="flex items-center gap-2 text-on-surface-variant hover:text-[#a83725] transition-colors">
+              <span class="material-symbols-outlined text-sm">forum</span>
+              <span class="text-xs font-bold">56 Replies</span>
+            </a>
+            <button onclick="sharePost('Stoicism in the Age of Constant Interruption')" class="flex items-center gap-2 text-on-surface-variant hover:text-[#a83725] transition-colors">
+              <span class="material-symbols-outlined text-sm">share</span>
+              <span class="text-xs font-bold">Share</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="discussion-card visible group bg-surface-container-lowest p-8 rounded-xl hover:bg-surface-container-low transition-colors duration-300" data-cat="modernity" data-tags="logic" data-likes="189" data-date="1">
+        <div class="flex justify-between items-start mb-5">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-lg bg-[#a83725]/20 flex items-center justify-center text-[#a83725] font-bold serif text-lg">S</div>
+            <div>
+              <h4 class="font-bold text-sm text-primary">Sofia Reyes</h4>
+              <span class="text-xs text-on-surface-variant">Digital Humanist · 1h ago</span>
+            </div>
+          </div>
+          <button onclick="toggleBookmark(this)" class="material-symbols-outlined text-outline-variant hover:text-[#a83725] transition-colors cursor-pointer text-xl">bookmark</button>
+        </div>
+        <a class="block mb-4" href="discussion-detail.html">
+          <h2 class="text-2xl font-bold serif italic text-primary group-hover:text-[#a83725] transition-colors mb-3">Can Modernity Coexist with the Contemplative Life?</h2>
+          <p class="text-on-surface-variant leading-relaxed line-clamp-2">The tension between speed and depth has never been more acute. Is there a path that honors both the demands of modern life and the necessity of quiet reflection?</p>
+        </a>
+        <div class="flex gap-2 mb-4">
+          <span class="px-2 py-0.5 bg-surface-container rounded-full text-xs text-on-surface-variant">logic</span>
+          <span class="px-2 py-0.5 bg-surface-container rounded-full text-xs text-on-surface-variant">modernity</span>
+        </div>
+        <div class="flex items-center justify-between pt-5 border-t border-outline-variant/10">
+          <div class="flex gap-6">
+            <button onclick="likePost(this)" class="flex items-center gap-2 text-on-surface-variant hover:text-[#a83725] transition-colors">
+              <span class="material-symbols-outlined text-sm">favorite</span>
+              <span class="text-xs font-bold like-count">189</span>
+            </button>
+            <a href="discussion-detail.html" class="flex items-center gap-2 text-on-surface-variant hover:text-[#a83725] transition-colors">
+              <span class="material-symbols-outlined text-sm">forum</span>
+              <span class="text-xs font-bold">31 Replies</span>
+            </a>
+            <button onclick="sharePost('Can Modernity Coexist with the Contemplative Life?')" class="flex items-center gap-2 text-on-surface-variant hover:text-[#a83725] transition-colors">
+              <span class="material-symbols-outlined text-sm">share</span>
+              <span class="text-xs font-bold">Share</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 5 -->
+      <article class="discussion-card visible group bg-surface-container-lowest p-8 rounded-xl hover:bg-surface-container-low transition-colors duration-300" data-cat="politics" data-tags="politics ethics" data-likes="621" data-date="8">
+        <div class="flex justify-between items-start mb-5">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-lg bg-[#002147]/30 flex items-center justify-center text-[#002147] font-bold serif text-lg">A</div>
+            <div>
+              <h4 class="font-bold text-sm text-primary">Amara Osei</h4>
+              <span class="text-xs text-on-surface-variant">Political Theorist · 8h ago</span>
+            </div>
+          </div>
+          <button onclick="toggleBookmark(this)" class="material-symbols-outlined text-outline-variant hover:text-[#a83725] transition-colors cursor-pointer text-xl">bookmark</button>
+        </div>
+        <a class="block mb-4" href="discussion-detail.html">
+          <h2 class="text-2xl font-bold serif italic text-primary group-hover:text-[#a83725] transition-colors mb-3">The Return of Virtue Ethics in Political Discourse</h2>
+          <p class="text-on-surface-variant leading-relaxed line-clamp-2">Aristotle's framework of virtue and character seems newly relevant in an era when institutional trust has collapsed. Can character-based politics rebuild civic life?</p>
+        </a>
+        <div class="flex gap-2 mb-4">
+          <span class="px-2 py-0.5 bg-surface-container rounded-full text-xs text-on-surface-variant">politics</span>
+          <span class="px-2 py-0.5 bg-surface-container rounded-full text-xs text-on-surface-variant">ethics</span>
+        </div>
+        <div class="flex items-center justify-between pt-5 border-t border-outline-variant/10">
+          <div class="flex gap-6">
+            <button onclick="likePost(this)" class="flex items-center gap-2 text-on-surface-variant hover:text-[#a83725] transition-colors">
+              <span class="material-symbols-outlined text-sm">favorite</span>
+              <span class="text-xs font-bold like-count">621</span>
+            </button>
+            <a href="discussion-detail.html" class="flex items-center gap-2 text-on-surface-variant hover:text-[#a83725] transition-colors">
+              <span class="material-symbols-outlined text-sm">forum</span>
+              <span class="text-xs font-bold">98 Replies</span>
+            </a>
+            <button onclick="sharePost('The Return of Virtue Ethics in Political Discourse')" class="flex items-center gap-2 text-on-surface-variant hover:text-[#a83725] transition-colors">
+              <span class="material-symbols-outlined text-sm">share</span>
+              <span class="text-xs font-bold">Share</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- end discussion-list -->
+
+    <!-- Mobile start discussion button -->
+    <div class="md:hidden fixed bottom-6 right-6">
+      <button onclick="openModal()" class="bg-[#a83725] text-white px-5 py-4 rounded-full shadow-xl font-bold flex items-center gap-2">
+        <span class="material-symbols-outlined">add</span> Start Discussion
+      </button>
+    </div>
+
+  </main>
 </div>
-</div>
-<span class="material-symbols-outlined text-outline-variant group-hover:text-secondary transition-colors cursor-pointer">bookmark</span>
-</div>
-<a class="block mb-4" href="discussion-detail.html">
-<h2 class="text-3xl font-headline font-bold text-primary group-hover:text-secondary transition-colors mb-4">The Ethics of Algorithmic Determinism</h2>
-<p class="text-on-surface-variant font-body leading-relaxed line-clamp-2">Does the predictive nature of modern software erode the concept of free will as defined by Kant, or is it merely a more efficient mirror of our existing habits? We examine the subtle shift from choice to curated suggestion.</p>
-</a>
-<div class="flex items-center justify-between pt-6 border-t border-outline-variant/10">
-<div class="flex gap-6">
-<div class="flex items-center gap-2 text-on-surface-variant group/stat cursor-pointer hover:text-secondary transition-colors">
-<span class="material-symbols-outlined text-sm">forum</span>
-<span class="text-xs font-bold">124 Replies</span>
-</div>
-<div class="flex items-center gap-2 text-on-surface-variant group/stat cursor-pointer hover:text-secondary transition-colors">
-<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">favorite</span>
-<span class="text-xs font-bold">842 Likes</span>
-</div>
-</div>
-<div class="flex -space-x-2">
-<img class="w-6 h-6 rounded-full border-2 border-surface object-cover" data-alt="Small round avatar portrait of a student" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSPTYXP2JV3Cf300hOzkCquqzFSEk3weRsgh-Rer4anNngrzOCeeI-ojCf9KZWKa5Uqx5OzsQdazGFDOebXz1mkXD98La7GohLqkKWiHpPVAiEStoRAeyfX1ZulH-VxK9HNne3j65w9xCm68Hn9CDX5iD6vJazvsn6tBGXBMrKw9I2V_ixbbd5NjAIRC6TKBtzHhSCBu8wZZl_iEuyAzSVcieoBkUwW32sCQ5dIbOIsgsbxMFrOGyQqJyauppitATsrI5uymfHuwXj"/>
-<img class="w-6 h-6 rounded-full border-2 border-surface object-cover" data-alt="Small round avatar portrait of a researcher" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiHf6JDHdoJSmonUtMUYJ9eJrBCTmLoYdxs50SfmfB-U-pN5BEaQSSRBqs5JsbSQE7iWLUpiX7_qOEgDz5IkytqvZNV7RGqcHZm5bNJDF6GQygCzIPHVEROM13CIThLB8ayKHRbSJDHF8Z9wHiFzAqIT5kOhNsmR6ScrMubUncTw8J9a03oTPYp26_m5TOq7tHyt5pyuFDoLafphgmzHQV0c2_GhWJC6tN4X4_C5Rt5meuBuOm56E-S9k2wJNinzpCmaBiPIzGKt5l"/>
-<div class="w-6 h-6 rounded-full bg-secondary-fixed text-[10px] flex items-center justify-center font-bold text-on-secondary-container border-2 border-surface">+18</div>
-</div>
-</div>
-</article>
-<!-- Discussion Card 2 (Featured Quote variant) -->
-<article class="bg-surface-container-low p-8 rounded-xl border-l-4 border-secondary border-none">
-<div class="flex items-center gap-3 mb-6">
-<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">format_quote</span>
-<span class="text-xs font-label uppercase tracking-widest text-secondary font-bold">Featured Discussion</span>
-</div>
-<h2 class="text-2xl font-headline italic text-primary leading-tight mb-6">"Is the silence of the library a technical requirement for focus, or a ritualistic tether to the sacred nature of the word?"</h2>
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-3">
-<img alt="Author" class="w-10 h-10 rounded-lg object-cover" data-alt="Portrait of an elegant woman in a dark studio setting with soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAm0TjSbVfX1Ol5TH0CeHq5zyHy9oVa31prChfcA9r02X5EsbJSV5J15EULNnabiH1XxttkHhZR5BAvt9PHZbixzaCTsX22Z-1SVIvo0iSgOd_pGRXg5p2lcVliFtfBouRkVbQ2do5GL7ZXwLf8K93sTd3fgbZA123C_yC-Uo6DietOuc6yXLXkr0197XGEv7nJfymq5lHrT7MDvuLMtgsJfuLxXXjD6T8SX9yLk1-cMoy-jmvyh2XyZR2KybZa-yMvhvufzTP-2iZ9"/>
-<span class="font-label font-bold text-sm text-primary">Elara Thorne</span>
-</div>
-<button class="px-6 py-2 bg-primary text-on-primary rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-primary-container transition-colors">Join Thread</button>
-</div>
-</article>
-<!-- Discussion Card 3 -->
-<article class="group bg-surface-container-lowest p-8 rounded-xl hover:bg-surface-container-low transition-colors duration-300 border-none">
-<div class="flex justify-between items-start mb-6">
-<div class="flex items-center gap-4">
-<img alt="Author" class="w-12 h-12 rounded-lg object-cover" data-alt="Middle-aged man with a graying beard, intellectual vibe, natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqj7V8tXEgQf2dN-PZtzmBys4BD9y4RqLufJou8Us8TJZ0z6IXgyQDhOHb5C7cA9luOclXIhOS5pNpIcc59FWE0kQgN3DrGC73tnhelK0URkqB3-OX2d1yD8tjY2PPfFgDqmSsDVquoqxiszCQAiIgPLLdJ5U4uLpF7hp6cbIfL2_cNElGXTPOKDoWC3rh4bRkTMfgphI8z7J62YazAwBLrpTEBRPAdL5kW34Wciir39AXM5SynnaGyPJZAa08YZbWv4G43gshYwGd"/>
-<div>
-<h4 class="font-label font-bold text-sm text-primary">Marcus Sterling</h4>
-<span class="text-xs text-on-surface-variant">Archivist • 5h ago</span>
-</div>
-</div>
-<span class="material-symbols-outlined text-outline-variant group-hover:text-secondary transition-colors cursor-pointer">bookmark</span>
-</div>
-<a class="block mb-4" href="discussion-detail.html">
-<h2 class="text-3xl font-headline font-bold text-primary group-hover:text-secondary transition-colors mb-4">Stoicism in the Age of Constant Interruption</h2>
-<p class="text-on-surface-variant font-body leading-relaxed line-clamp-2">How Marcus Aurelius might have managed a smartphone notification center. Exploring the fortress of the mind amidst the digital cacophony.</p>
-</a>
-<div class="flex items-center justify-between pt-6 border-t border-outline-variant/10">
-<div class="flex gap-6">
-<div class="flex items-center gap-2 text-on-surface-variant group/stat cursor-pointer hover:text-secondary transition-colors">
-<span class="material-symbols-outlined text-sm">forum</span>
-<span class="text-xs font-bold">56 Replies</span>
-</div>
-<div class="flex items-center gap-2 text-on-surface-variant group/stat cursor-pointer hover:text-secondary transition-colors">
-<span class="material-symbols-outlined text-sm">favorite</span>
-<span class="text-xs font-bold">312 Likes</span>
-</div>
-</div>
-<div class="flex gap-2">
-<span class="material-symbols-outlined text-outline-variant text-sm">share</span>
-</div>
-</div>
-</article>
-</div>
-</main>
-</div>
+
 <!-- Footer -->
-<footer class="w-full py-12 border-t border-[#002147]/10 bg-[#fdfcfb] dark:bg-[#000a1e]">
-<div class="flex flex-col md:flex-row justify-between items-center px-12 gap-8 max-w-screen-2xl mx-auto">
-<div class="flex flex-col items-center md:items-start gap-4">
-<span class="font-['Newsreader'] text-lg font-bold text-[#002147] dark:text-[#fdfcfb]">The Reader's Mind</span>
-<p class="font-['Manrope'] text-xs uppercase tracking-widest text-[#002147]/60">© 2024 The Reader's Mind. Crafted for discourse.</p>
-</div>
-<div class="flex gap-8">
-<a class="font-['Manrope'] text-xs uppercase tracking-widest text-[#002147]/60 hover:opacity-100 transition-opacity" href="index.html">Community Guidelines</a>
-<a class="font-['Manrope'] text-xs uppercase tracking-widest text-[#002147]/60 hover:opacity-100 transition-opacity" href="index.html">About the Atelier</a>
-<a class="font-['Manrope'] text-xs uppercase tracking-widest text-[#002147]/60 hover:opacity-100 transition-opacity underline" href="index.html">Privacy Policy</a>
-<a class="font-['Manrope'] text-xs uppercase tracking-widest text-[#002147]/60 hover:opacity-100 transition-opacity" href="index.html">Contact</a>
-</div>
-</div>
+<footer class="w-full py-10 border-t border-[#002147]/10 bg-[#fdfcfb] md:ml-64">
+  <div class="flex flex-col md:flex-row justify-between items-center px-12 gap-6 max-w-screen-2xl mx-auto">
+    <span class="serif italic text-[#002147] text-lg">The Reader's Mind</span>
+    <div class="flex gap-8 flex-wrap justify-center text-xs uppercase tracking-widest text-[#002147]/50">
+      <a href="index.html" class="hover:text-[#002147] transition-colors">Guidelines</a>
+      <a href="index.html" class="hover:text-[#002147] transition-colors">About</a>
+      <a href="index.html" class="hover:text-[#002147] transition-colors">Privacy</a>
+      <a href="index.html" class="hover:text-[#002147] transition-colors">Contact</a>
+    </div>
+  </div>
 </footer>
 
+<!-- ===== START A DISCUSSION MODAL ===== -->
+<div class="modal-overlay" id="modal" onclick="handleOverlayClick(event)">
+  <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl mx-4 overflow-hidden" onclick="event.stopPropagation()">
+    <!-- Modal header -->
+    <div class="flex items-center justify-between px-8 py-6 border-b border-outline-variant/20">
+      <h2 class="serif italic text-2xl text-[#002147] font-bold">Start a Discussion</h2>
+      <button onclick="closeModal()" class="material-symbols-outlined text-on-surface-variant hover:text-on-surface transition-colors text-2xl">close</button>
+    </div>
+    <!-- Modal body -->
+    <div class="px-8 py-6 space-y-5">
+      <div>
+        <label class="block text-xs uppercase tracking-widest text-on-surface-variant/70 font-bold mb-2">Title <span class="text-[#a83725]">*</span></label>
+        <input id="modal-title" type="text" placeholder="Pose your question or thesis…" maxlength="120"
+          class="w-full bg-surface-container-low px-4 py-3 text-on-surface text-sm border-0 border-b-2 border-outline-variant/40 focus:border-[#a83725] focus:outline-none focus:ring-0 transition-colors placeholder:text-on-surface-variant/40 rounded-none"/>
+        <p class="text-xs text-on-surface-variant/40 mt-1 text-right" id="char-count">0 / 120</p>
+      </div>
+      <div>
+        <label class="block text-xs uppercase tracking-widest text-on-surface-variant/70 font-bold mb-2">Category <span class="text-[#a83725]">*</span></label>
+        <select id="modal-cat" class="w-full bg-surface-container-low px-4 py-3 text-on-surface text-sm border-0 border-b-2 border-outline-variant/40 focus:border-[#a83725] focus:outline-none focus:ring-0 rounded-none appearance-none">
+          <option value="">Select a category…</option>
+          <option value="philosophy">Philosophy</option>
+          <option value="art">Art History</option>
+          <option value="modernity">Modernity</option>
+          <option value="politics">Politics</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-xs uppercase tracking-widest text-on-surface-variant/70 font-bold mb-2">Your Opening Argument <span class="text-[#a83725]">*</span></label>
+        <textarea id="modal-body" rows="5" placeholder="Share your perspective, a provocation, or a question that deserves deep exploration…"
+          class="w-full bg-surface-container-low px-4 py-3 text-on-surface text-sm border-0 border-b-2 border-outline-variant/40 focus:border-[#a83725] focus:outline-none focus:ring-0 transition-colors placeholder:text-on-surface-variant/40 rounded-none resize-none"></textarea>
+      </div>
+      <div>
+        <label class="block text-xs uppercase tracking-widest text-on-surface-variant/70 font-bold mb-2">Tags (optional)</label>
+        <input id="modal-tags" type="text" placeholder="e.g. stoicism, ethics, logic — comma separated"
+          class="w-full bg-surface-container-low px-4 py-3 text-on-surface text-sm border-0 border-b-2 border-outline-variant/40 focus:border-[#a83725] focus:outline-none focus:ring-0 transition-colors placeholder:text-on-surface-variant/40 rounded-none"/>
+      </div>
+      <!-- Modal error -->
+      <div id="modal-error" class="hidden bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-2 rounded flex items-center gap-2">
+        <span class="material-symbols-outlined text-base">error</span>
+        <span id="modal-error-text">Please fill in all required fields.</span>
+      </div>
+    </div>
+    <!-- Modal footer -->
+    <div class="flex items-center justify-end gap-4 px-8 py-5 bg-surface-container-low/50 border-t border-outline-variant/10">
+      <button onclick="closeModal()" class="px-6 py-2.5 text-sm text-on-surface-variant hover:text-on-surface font-semibold transition-colors">Cancel</button>
+      <button onclick="submitDiscussion()" class="px-8 py-2.5 bg-[#a83725] text-white text-sm font-bold rounded hover:bg-[#8a2d1e] transition-colors">Publish Discussion</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-[#000a1e] text-white text-sm px-6 py-3 rounded shadow-lg opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-2 whitespace-nowrap z-50">
+  <span class="material-symbols-outlined text-base text-[#a83725]" id="toast-icon">check_circle</span>
+  <span id="toast-msg">Done!</span>
+</div>
+
 <script>
-  // Inject username and sign-out into nav
-  (function() {
-    const user = sessionStorage.getItem('trm_user') || 'Reader';
-    const navRight = document.querySelector('.trm-nav-right');
-    if (navRight) {
-      navRight.innerHTML = '<span class="font-[\'Manrope\'] text-sm text-[#002147]/70 hidden md:inline">Hello, <strong>' + user + '</strong></span>' +
-        '<button onclick="signOut()" class="bg-transparent border border-[#002147]/30 text-[#002147] text-sm font-[\'Manrope\'] px-4 py-1.5 rounded hover:bg-[#002147] hover:text-white transition-colors">Sign Out</button>';
-    }
-  })();
+  // --- Auth & Nav ---
+  const user = sessionStorage.getItem('trm_user') || 'Reader';
+  document.getElementById('nav-right').innerHTML =
+    `<span class="text-sm text-[#002147]/70 hidden md:inline">Hello, <strong>${user}</strong></span>
+     <button onclick="signOut()" class="border border-[#002147]/30 text-[#002147] text-sm px-4 py-1.5 rounded hover:bg-[#002147] hover:text-white transition-colors">Sign Out</button>`;
+
   function signOut() {
     sessionStorage.removeItem('trm_auth');
     sessionStorage.removeItem('trm_user');
     window.location.href = 'login.html';
   }
+
+  // --- Toast ---
+  function showToast(msg, icon='check_circle') {
+    const t = document.getElementById('toast');
+    document.getElementById('toast-msg').textContent = msg;
+    document.getElementById('toast-icon').textContent = icon;
+    t.style.opacity = '1';
+    t.style.transform = 'translateX(-50%) translateY(-8px)';
+    setTimeout(() => { t.style.opacity='0'; t.style.transform='translateX(-50%) translateY(0)'; }, 2500);
+  }
+
+  // --- Modal ---
+  function openModal() {
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('modal-title').focus(), 100);
+  }
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow = '';
+    document.getElementById('modal-error').classList.add('hidden');
+  }
+  function handleOverlayClick(e) { if (e.target === document.getElementById('modal')) closeModal(); }
+
+  // Char counter
+  document.getElementById('modal-title').addEventListener('input', function() {
+    document.getElementById('char-count').textContent = this.value.length + ' / 120';
+  });
+
+  function submitDiscussion() {
+    const title = document.getElementById('modal-title').value.trim();
+    const cat = document.getElementById('modal-cat').value;
+    const body = document.getElementById('modal-body').value.trim();
+    if (!title || !cat || !body) {
+      document.getElementById('modal-error-text').textContent = 'Please fill in all required fields.';
+      document.getElementById('modal-error').classList.remove('hidden');
+      return;
+    }
+    closeModal();
+    // Prepend new card to list
+    const tags = document.getElementById('modal-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+    addDiscussionCard(title, cat, tags, body);
+    showToast('Discussion published!');
+    // Reset form
+    document.getElementById('modal-title').value = '';
+    document.getElementById('modal-cat').value = '';
+    document.getElementById('modal-body').value = '';
+    document.getElementById('modal-tags').value = '';
+    document.getElementById('char-count').textContent = '0 / 120';
+  }
+
+  function addDiscussionCard(title, cat, tags, body) {
+    const list = document.getElementById('discussion-list');
+    const tagHtml = tags.map(t => `<span class="px-2 py-0.5 bg-surface-container rounded-full text-xs text-on-surface-variant">${t}</span>`).join('');
+    const card = document.createElement('article');
+    card.className = 'discussion-card visible group bg-surface-container-lowest p-8 rounded-xl hover:bg-surface-container-low transition-colors duration-300 border-l-4 border-[#a83725]';
+    card.dataset.cat = cat;
+    card.dataset.tags = tags.join(' ');
+    card.dataset.likes = '0';
+    card.dataset.date = '0';
+    card.innerHTML = `
+      <div class="flex items-center gap-2 mb-4">
+        <span class="text-xs uppercase tracking-widest text-[#a83725] font-bold">New · Just now</span>
+      </div>
+      <div class="flex justify-between items-start mb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-lg bg-[#a83725] flex items-center justify-center text-white font-bold serif">${user[0].toUpperCase()}</div>
+          <div>
+            <h4 class="font-bold text-sm text-primary">${user}</h4>
+            <span class="text-xs text-on-surface-variant">Just now</span>
+          </div>
+        </div>
+        <button onclick="toggleBookmark(this)" class="material-symbols-outlined text-outline-variant hover:text-[#a83725] transition-colors cursor-pointer text-xl">bookmark</button>
+      </div>
+      <a class="block mb-4" href="discussion-detail.html">
+        <h2 class="text-2xl font-bold serif italic text-primary group-hover:text-[#a83725] transition-colors mb-2">${title}</h2>
+        <p class="text-on-surface-variant leading-relaxed line-clamp-2">${body}</p>
+      </a>
+      <div class="flex gap-2 mb-4">${tagHtml}</div>
+      <div class="flex gap-6 pt-4 border-t border-outline-variant/10">
+        <button onclick="likePost(this)" class="flex items-center gap-2 text-on-surface-variant hover:text-[#a83725] transition-colors">
+          <span class="material-symbols-outlined text-sm">favorite</span>
+          <span class="text-xs font-bold like-count">0</span>
+        </button>
+        <a href="discussion-detail.html" class="flex items-center gap-2 text-on-surface-variant hover:text-[#a83725] transition-colors">
+          <span class="material-symbols-outlined text-sm">forum</span>
+          <span class="text-xs font-bold">0 Replies</span>
+        </a>
+      </div>`;
+    list.prepend(card);
+  }
+
+  // --- Like button ---
+  function likePost(btn) {
+    const countEl = btn.querySelector('.like-count');
+    const icon = btn.querySelector('.material-symbols-outlined');
+    const liked = btn.dataset.liked === 'true';
+    btn.dataset.liked = liked ? 'false' : 'true';
+    countEl.textContent = parseInt(countEl.textContent) + (liked ? -1 : 1);
+    icon.style.fontVariationSettings = liked ? "'FILL' 0" : "'FILL' 1";
+    icon.style.color = liked ? '' : '#a83725';
+  }
+
+  // --- Bookmark ---
+  function toggleBookmark(btn) {
+    const saved = btn.dataset.saved === 'true';
+    btn.dataset.saved = saved ? 'false' : 'true';
+    btn.style.fontVariationSettings = saved ? "'FILL' 0" : "'FILL' 1";
+    btn.style.color = saved ? '' : '#a83725';
+    showToast(saved ? 'Removed from bookmarks' : 'Saved to bookmarks', saved ? 'bookmark' : 'bookmark_added');
+  }
+
+  // --- Share ---
+  function sharePost(title) {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(window.location.href);
+      showToast('Link copied to clipboard!', 'link');
+    } else {
+      showToast('Share: ' + title, 'share');
+    }
+  }
+
+  // --- Filter by sort (Trending / New / Top) ---
+  let currentSort = 'trending';
+  function sortBy(sort, btn) {
+    currentSort = sort;
+    document.querySelectorAll('.filter-btn').forEach(b => {
+      b.classList.remove('active');
+      b.className = b.className.replace('text-primary font-bold', '') + ' text-on-surface-variant hover:text-primary';
+    });
+    btn.classList.add('active');
+    btn.className = btn.className.replace('text-on-surface-variant hover:text-primary', '');
+    applyFilters();
+  }
+
+  // --- Filter by tag ---
+  let currentTag = 'all';
+  function filterTag(tag, btn) {
+    currentTag = tag;
+    document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyFilters();
+  }
+
+  // --- Filter by category (sidebar) ---
+  let currentCat = 'all';
+  function filterCategory(cat, link) {
+    currentCat = cat;
+    document.querySelectorAll('.cat-link').forEach(l => {
+      l.classList.remove('active');
+      l.className = l.className.replace('text-[#a83725] font-bold', 'text-[#002147]/60');
+    });
+    link.classList.add('active');
+    // Update page title
+    const titles = { all: 'All Dialogues', philosophy: 'Philosophy', art: 'Art History', modernity: 'Modernity', politics: 'Politics' };
+    document.getElementById('page-title').textContent = titles[cat] || 'All Dialogues';
+    applyFilters();
+  }
+
+  function applyFilters() {
+    const cards = document.querySelectorAll('.discussion-card');
+    let anyVisible = false;
+    cards.forEach(card => {
+      const catMatch = currentCat === 'all' || card.dataset.cat === currentCat;
+      const tagMatch = currentTag === 'all' || (card.dataset.tags || '').includes(currentTag);
+      if (catMatch && tagMatch) { card.classList.add('visible'); anyVisible = true; }
+      else card.classList.remove('visible');
+    });
+    document.getElementById('no-results').classList.toggle('hidden', anyVisible);
+
+    // Sort visible cards
+    const list = document.getElementById('discussion-list');
+    const visibleCards = [...list.querySelectorAll('.discussion-card.visible')];
+    visibleCards.sort((a, b) => {
+      if (currentSort === 'trending' || currentSort === 'top') {
+        return parseInt(b.dataset.likes) - parseInt(a.dataset.likes);
+      } else { // new
+        return parseInt(a.dataset.date) - parseInt(b.dataset.date);
+      }
+    });
+    visibleCards.forEach(c => list.appendChild(c));
+  }
+
+  // Keyboard: Escape closes modal
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 </script>
-</body></html>
+</body>
+</html>

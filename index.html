@@ -109,14 +109,7 @@
 <a class="text-[#002147]/70 dark:text-[#fdfcfb]/70 font-['Newsreader'] italic tracking-tight hover:text-[#a83725] transition-all duration-200" href="index.html">Archive</a>
 </div>
 </div>
-<div class="flex items-center gap-4 trm-nav-right">
-<a href="login.html" class="bg-[#000a1e] text-white text-sm font-['Manrope'] px-5 py-2 rounded hover:bg-[#002147] transition-colors">Sign In</a>
-
-<span class="material-symbols-outlined text-[#002147] dark:text-[#fdfcfb] cursor-pointer scale-95 active:scale-90" data-icon="notifications">notifications</span>
-<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant/15">
-<img alt="User profile" data-alt="professional portrait of a man with spectacles in a library setting, warm academic lighting, scholarly aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDs3fslaSmAXED2M7L6fyvxLw0cUO_eQIhtLgqYSpxu59ynW4H8ViCP-imqGznbN4Tb47ojKz9P3NBeQyD4O9QMWljCTUjN6bsPGZ4M6VZNRxGXunBePgphKXPUex_VwencbDS24rQUBpUYXKhra1JlJfoUEiARW5HhDeWZKtw6LUqAKhwVexIhjBdNUW2wcJix8lxOmB7QAu-KoO5rKqpK0x2RZzVcm8176YQ8NtCphshlG61U3Hu7fYN4JdRJQbe6oJUlF7JY4F6N"/>
-</div>
-</div>
+<div id="nav-right" class="flex items-center gap-4"></div>
 </div>
 </nav>
 <div class="flex max-w-screen-2xl mx-auto">
@@ -153,7 +146,7 @@
                     Politics
                 </a>
 </nav>
-<button class="mt-8 bg-secondary text-on-secondary py-3 px-4 rounded-lg font-bold tracking-tight hover:opacity-90 transition-opacity" onclick="window.location='login.html'" style="cursor:pointer">
+<button class="mt-8 bg-secondary text-on-secondary py-3 px-4 rounded-lg font-bold tracking-tight hover:opacity-90 transition-opacity" onclick="window.location='discussions.html'">
                 Start a Discussion
             </button>
 </aside>
@@ -169,7 +162,7 @@
 <h1 class="font-headline text-5xl md:text-7xl italic leading-tight mb-8">Where ideas breathe and discourse matures.</h1>
 <p class="font-body text-lg md:text-xl text-surface-variant/90 mb-10 leading-relaxed">Join a community of curious minds dedicated to deep reading and thoughtful inquiry. No feeds, just resonance.</p>
 <div class="flex flex-wrap gap-4">
-<button class="bg-secondary text-on-secondary px-8 py-4 rounded-lg font-bold text-lg hover:bg-secondary-container transition-colors" onclick="window.location='login.html'">Enter the Atelier</button>
+<button class="bg-secondary text-on-secondary px-8 py-4 rounded-lg font-bold text-lg hover:bg-secondary-container transition-colors" onclick="window.location='discussions.html'">Enter the Atelier</button>
 <button class="bg-surface/10 backdrop-blur-md text-surface px-8 py-4 rounded-lg font-bold text-lg border border-surface/20 hover:bg-surface/20 transition-colors">Browse Essays</button>
 </div>
 </div>
@@ -273,15 +266,12 @@
 </footer>
 
 <script>
-  // Inject username and sign-out into nav
-  (function() {
-    const user = sessionStorage.getItem('trm_user') || 'Reader';
-    const navRight = document.querySelector('.trm-nav-right');
-    if (navRight) {
-      navRight.innerHTML = '<span class="font-[\'Manrope\'] text-sm text-[#002147]/70 hidden md:inline">Hello, <strong>' + user + '</strong></span>' +
-        '<button onclick="signOut()" class="bg-transparent border border-[#002147]/30 text-[#002147] text-sm font-[\'Manrope\'] px-4 py-1.5 rounded hover:bg-[#002147] hover:text-white transition-colors">Sign Out</button>';
-    }
-  })();
+  const user = sessionStorage.getItem('trm_user') || 'Reader';
+  const nr = document.getElementById('nav-right');
+  if (nr) {
+    nr.innerHTML = '<span class="text-sm text-[#002147]/70 hidden md:inline">Hello, <strong>' + user + '</strong></span>' +
+      '<button onclick="signOut()" class="border border-[#002147]/30 text-[#002147] text-sm px-4 py-1.5 rounded hover:bg-[#002147] hover:text-white transition-colors">Sign Out</button>';
+  }
   function signOut() {
     sessionStorage.removeItem('trm_auth');
     sessionStorage.removeItem('trm_user');

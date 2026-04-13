@@ -105,10 +105,7 @@
 <a class="text-[#002147]/70 dark:text-[#fdfcfb]/70 hover:text-[#a83725] transition-all duration-200" href="index.html">Archive</a>
 </div>
 </div>
-<div class="flex items-center gap-6">
-<button class="material-symbols-outlined text-[#002147] dark:text-[#fdfcfb] scale-95 active:scale-90" data-icon="notifications">notifications</button>
-<img alt="User profile" class="w-10 h-10 rounded-full object-cover" data-alt="close-up portrait of a thoughtful man with glasses in an academic setting with soft natural window light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDA0b2KSlKe0PywfikbRM8iI1U-sQsshVvuaPf7ux7P-C3vttzC4jdEO-3HbWsjul9gzgveEaFdjp1TyGcvjecOdM3pRU9xlfrAnjcZOA-FXHGDk9hjBlumbrSJW4R4Sfel4ZI7k2pdeQZLCvZChzy6OwVvBnp9zCwMfns6sAtp9KSt7uOVENX2TzKUXw_UaM5HMJRT9b7Gc6kcdgDoRyL1MuqkJw_ihq1Xigft_avEhCIuKv8FINX3TpWzwQRSy5EeHM84yfo2TnPt"/>
-</div>
+<div id="nav-right" class="flex items-center gap-4"></div>
 </div>
 </nav>
 <div class="flex max-w-screen-2xl mx-auto pt-20">
@@ -306,15 +303,12 @@
 </footer>
 
 <script>
-  // Inject username and sign-out into nav
-  (function() {
-    const user = sessionStorage.getItem('trm_user') || 'Reader';
-    const navRight = document.querySelector('.trm-nav-right');
-    if (navRight) {
-      navRight.innerHTML = '<span class="font-[\'Manrope\'] text-sm text-[#002147]/70 hidden md:inline">Hello, <strong>' + user + '</strong></span>' +
-        '<button onclick="signOut()" class="bg-transparent border border-[#002147]/30 text-[#002147] text-sm font-[\'Manrope\'] px-4 py-1.5 rounded hover:bg-[#002147] hover:text-white transition-colors">Sign Out</button>';
-    }
-  })();
+  const user = sessionStorage.getItem('trm_user') || 'Reader';
+  const nr = document.getElementById('nav-right');
+  if (nr) {
+    nr.innerHTML = '<span class="text-sm text-[#002147]/70 hidden md:inline">Hello, <strong>' + user + '</strong></span>' +
+      '<button onclick="signOut()" class="border border-[#002147]/30 text-[#002147] text-sm px-4 py-1.5 rounded hover:bg-[#002147] hover:text-white transition-colors">Sign Out</button>';
+  }
   function signOut() {
     sessionStorage.removeItem('trm_auth');
     sessionStorage.removeItem('trm_user');
