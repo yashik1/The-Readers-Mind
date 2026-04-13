@@ -403,16 +403,155 @@
 
 <script>
   // --- Auth & Nav ---
-  const user = sessionStorage.getItem('trm_user') || 'Reader';
-  document.getElementById('nav-right').innerHTML =
-    `<span class="text-sm text-[#002147]/70 hidden md:inline">Hello, <strong>${user}</strong></span>
-     <button onclick="signOut()" class="border border-[#002147]/30 text-[#002147] text-sm px-4 py-1.5 rounded hover:bg-[#002147] hover:text-white transition-colors">Sign Out</button>`;
+
+  // --- NAV: username highlight + profile dropdown ---
+  (function() {
+    const user = sessionStorage.getItem('trm_user') || 'Reader';
+    const nr = document.getElementById('nav-right');
+    if (!nr) return;
+    nr.innerHTML = `
+      <span class="text-sm text-[#002147]/60 hidden md:inline font-['Manrope']">Hello,&nbsp;<strong class="text-[#a83725] font-bold">${user}</strong></span>
+      <div class="relative" id="profile-menu-wrap">
+        <button id="profile-btn" onclick="toggleProfileMenu()" class="flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-[#002147]/5 transition-colors border border-[#002147]/15 focus:outline-none">
+          <div class="w-8 h-8 rounded-full bg-[#002147] flex items-center justify-center text-white text-sm font-bold font-['Newsreader']">${user[0].toUpperCase()}</div>
+          <span class="material-symbols-outlined text-base text-[#002147]/60 hidden md:inline">expand_more</span>
+        </button>
+        <!-- Dropdown -->
+        <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-[#002147]/8 z-50 overflow-hidden">
+          <div class="px-5 py-4 border-b border-[#002147]/8 bg-[#f6f3ea]">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-[#002147] flex items-center justify-center text-white font-bold font-['Newsreader'] text-lg">${user[0].toUpperCase()}</div>
+              <div>
+                <p class="font-bold text-[#002147] text-sm" id="dd-name">${user}</p>
+                <p class="text-xs text-[#002147]/50" id="dd-role">Member of the Atelier</p>
+              </div>
+            </div>
+          </div>
+          <nav class="py-2">
+            <button onclick="openProfileEdit()" class="w-full flex items-center gap-3 px-5 py-3 text-sm text-[#002147]/80 hover:bg-[#f6f3ea] transition-colors text-left">
+              <span class="material-symbols-outlined text-base text-[#002147]/50">manage_accounts</span> Edit Profile
+            </button>
+            <a href="discussions.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#002147]/80 hover:bg-[#f6f3ea] transition-colors">
+              <span class="material-symbols-outlined text-base text-[#002147]/50">bookmark</span> My Bookmarks
+            </a>
+            <a href="discussions.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#002147]/80 hover:bg-[#f6f3ea] transition-colors">
+              <span class="material-symbols-outlined text-base text-[#002147]/50">forum</span> My Discussions
+            </a>
+            <div class="border-t border-[#002147]/8 my-1"></div>
+            <button onclick="signOut()" class="w-full flex items-center gap-3 px-5 py-3 text-sm text-[#a83725] hover:bg-red-50 transition-colors text-left">
+              <span class="material-symbols-outlined text-base">logout</span> Sign Out
+            </button>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Profile Edit Modal -->
+      <div id="profile-modal" class="hidden fixed inset-0 bg-[#000a1e]/50 backdrop-blur-sm z-[200] flex items-center justify-center px-4">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden" onclick="event.stopPropagation()">
+          <div class="flex items-center justify-between px-7 py-5 border-b border-[#002147]/10">
+            <h2 class="font-['Newsreader'] italic text-xl text-[#002147] font-bold">Edit Profile</h2>
+            <button onclick="closeProfileEdit()" class="material-symbols-outlined text-[#002147]/40 hover:text-[#002147] transition-colors">close</button>
+          </div>
+          <div class="px-7 py-6 space-y-5">
+            <!-- Avatar -->
+            <div class="flex items-center gap-4 mb-2">
+              <div id="edit-avatar" class="w-14 h-14 rounded-full bg-[#002147] flex items-center justify-center text-white text-2xl font-bold font-['Newsreader']">${user[0].toUpperCase()}</div>
+              <div>
+                <p class="text-xs uppercase tracking-widest text-[#002147]/50 font-bold mb-1">Display Initial</p>
+                <p class="text-xs text-[#002147]/40">Updates automatically from your name</p>
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs uppercase tracking-widest text-[#002147]/60 font-bold mb-2">First Name</label>
+              <input id="edit-firstname" type="text" value="${user}"
+                class="w-full bg-[#f6f3ea] px-4 py-3 text-[#002147] text-sm border-0 border-b-2 border-[#c4c6cf]/40 focus:border-[#a83725] focus:outline-none focus:ring-0 rounded-none transition-colors"/>
+            </div>
+            <div>
+              <label class="block text-xs uppercase tracking-widest text-[#002147]/60 font-bold mb-2">Role / Title</label>
+              <input id="edit-role" type="text" placeholder="e.g. Fellow of Philosophy, Archivist…"
+                class="w-full bg-[#f6f3ea] px-4 py-3 text-[#002147] text-sm border-0 border-b-2 border-[#c4c6cf]/40 focus:border-[#a83725] focus:outline-none focus:ring-0 rounded-none transition-colors placeholder:text-[#002147]/30"/>
+            </div>
+            <div>
+              <label class="block text-xs uppercase tracking-widest text-[#002147]/60 font-bold mb-2">Bio</label>
+              <textarea id="edit-bio" rows="3" placeholder="A few words about your intellectual pursuits…"
+                class="w-full bg-[#f6f3ea] px-4 py-3 text-[#002147] text-sm border-0 border-b-2 border-[#c4c6cf]/40 focus:border-[#a83725] focus:outline-none focus:ring-0 rounded-none transition-colors resize-none placeholder:text-[#002147]/30"></textarea>
+            </div>
+            <div id="profile-success" class="hidden bg-green-50 border border-green-200 text-green-700 text-xs px-4 py-2 rounded flex items-center gap-2">
+              <span class="material-symbols-outlined text-sm">check_circle</span> Profile updated!
+            </div>
+          </div>
+          <div class="flex justify-end gap-3 px-7 py-4 bg-[#f6f3ea]/60 border-t border-[#002147]/8">
+            <button onclick="closeProfileEdit()" class="px-5 py-2 text-sm text-[#002147]/60 hover:text-[#002147] font-semibold transition-colors">Cancel</button>
+            <button onclick="saveProfile()" class="px-7 py-2 bg-[#a83725] text-white text-sm font-bold rounded hover:bg-[#8a2d1e] transition-colors">Save Changes</button>
+          </div>
+        </div>
+      </div>`;
+
+    // Load saved role into dropdown
+    const savedRole = sessionStorage.getItem('trm_role');
+    if (savedRole) document.getElementById('dd-role').textContent = savedRole;
+  })();
+
+  function toggleProfileMenu() {
+    const dd = document.getElementById('profile-dropdown');
+    dd.classList.toggle('hidden');
+  }
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', function(e) {
+    const wrap = document.getElementById('profile-menu-wrap');
+    if (wrap && !wrap.contains(e.target)) {
+      document.getElementById('profile-dropdown').classList.add('hidden');
+    }
+  });
+
+  function openProfileEdit() {
+    document.getElementById('profile-dropdown').classList.add('hidden');
+    // Pre-fill saved values
+    const savedRole = sessionStorage.getItem('trm_role') || '';
+    const savedBio = sessionStorage.getItem('trm_bio') || '';
+    document.getElementById('edit-role').value = savedRole;
+    document.getElementById('edit-bio').value = savedBio;
+    document.getElementById('profile-success').classList.add('hidden');
+    document.getElementById('profile-modal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeProfileEdit() {
+    document.getElementById('profile-modal').classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  function saveProfile() {
+    const newName = document.getElementById('edit-firstname').value.trim() || 'Reader';
+    const newRole = document.getElementById('edit-role').value.trim() || 'Member of the Atelier';
+    const newBio = document.getElementById('edit-bio').value.trim();
+    sessionStorage.setItem('trm_user', newName);
+    sessionStorage.setItem('trm_role', newRole);
+    sessionStorage.setItem('trm_bio', newBio);
+    // Update UI live
+    document.getElementById('dd-name').textContent = newName;
+    document.getElementById('dd-role').textContent = newRole;
+    document.getElementById('edit-avatar').textContent = newName[0].toUpperCase();
+    // Update "Hello, Name" span
+    const helloSpan = document.querySelector('#nav-right > span strong');
+    if (helloSpan) helloSpan.textContent = newName;
+    document.getElementById('profile-success').classList.remove('hidden');
+    setTimeout(closeProfileEdit, 1200);
+  }
 
   function signOut() {
     sessionStorage.removeItem('trm_auth');
     sessionStorage.removeItem('trm_user');
+    sessionStorage.removeItem('trm_role');
+    sessionStorage.removeItem('trm_bio');
     window.location.href = 'login.html';
   }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') { closeProfileEdit(); document.getElementById('profile-dropdown').classList.add('hidden'); }
+  });
+
 
   // --- Toast ---
   function showToast(msg, icon='check_circle') {
